@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qun.mapper.UserMapper">
+    <!--  缓存  -->
+    <cache/>
+
+    <select id="queryUserList" resultType="User">
+        select * from user
+    </select>
+
+
+
+    <!-- 复杂对象的查询 -->
+    <select id="getUserByID" resultMap="UserWithCards">
+        select u.uid uid,uname,card_counts counts,gender,phone,cid,amount,date
+            from user u,card c
+            where u.uid=#{uid}
+    </select>
+    <resultMap id="UserWithCards" type="User">
+        <result property="uid" column="uid"/>
+        <result property="uname" column="uname"/>
+        <result property="upwd" column="upwd"/>
+        <result property="phone" column="phone"/>
+        <result property="gender" column="gender"/>
+        <result property="cardCounts" column="counts"/>
+        <!--复杂的属性，我们需要单独处理，对象：association 集合：collection
+            JavaType=“” 指定属性的类型！，但是集合里的泛型属性使用ofType=“”
+        -->
+        <collection property="cards" ofType="Card">
+            <result property="cid" column="cid"/>
+            <result property="amount" column="amount"/>
+            <result property="date" column="date"/>
+        </collection>
+    </resultMap>
+
+
+
+
+
+    <select id="checkLogin">
+        select * from user where uid = #{id} and upwd = #{pwd}
+    </select>
+
+    <insert id="addUser" parameterType="User">
+        insert into user (uid,uname,upwd,phone) values (#{uid},#{uname},#{upwd},#{phone})
+    </insert>
+
+    <update id="alterUser" parameterType="User">
+        update user set uname=#{uname},phone=#{phone},gender=#{gender} where uid = #{uid}
+    </update>
+
+    <delete id="deleteUser" parameterType="int">
+        delete from user where uid = #{id}
+    </delete>
+
+
+
+
+</mapper>

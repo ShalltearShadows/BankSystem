@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Dashboard Template for Bootstrap</title>
+	<div th:replace="~{commons/headdoc.html::headdoc}"></div>
+
+</head>
+
+<body>
+
+	<div th:replace="~{commons/topbar.html::topbar}"></div>
+
+	<div class="container-fluid">
+		<div class="row">
+
+			<div th:replace="~{commons/sidebar.html::sidebar}"></div>
+
+			<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+
+
+				<div class="table-responsive">
+					<table class="table table-striped table-sm">
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>Name</th>
+								<th>Phone</th>
+								<th>Gender</th>
+								<th>Operation</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="user:${users}">
+								<td th:text="${user.getUid()}"></td>
+								<td th:text="${user.getUname()}"></td>
+								<td th:text="${user.getPhone()}"></td>
+								<td th:text="${user.getGender()==0?'女':'男'}"></td>
+<!--								<td th:text="${#dates.format(user.getCard1().getDate(),'yyyy-MM-dd HH:mm:ss')}"></td>-->
+								<td>
+									<a class="btn btn-sm btn-primary"
+									   th:href="@{/user/update/}+${user.uid}">&nbsp;alter&nbsp;</a>
+									<a class="btn btn-sm btn-danger"
+									   th:href="@{/user/delete/}+${user.uid}">&nbsp;delete&nbsp;</a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</main>
+		</div>
+	</div>
+
+	<div th:replace="~{commons/jsdoc.html::jsdoc}"></div>
+
+</body>
+
+</html>

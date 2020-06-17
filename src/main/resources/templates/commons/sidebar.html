@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+    <!-- 侧边栏 -->
+    <nav class="heighten" th:fragment="sidebar(first,second)">
+
+        <div class="sidebar sidebar-style-2">
+            <div class="sidebar-wrapper scrollbar scrollbar-inner">
+                <div class="sidebar-content">
+                    <!--头像区-->
+                    <div class="user">
+                        <!--头像-->
+                        <div class="avatar-sm float-left mr-2">
+                            <img src="/img/profile.jpg" alt="..." class="avatar-img rounded-circle">
+                        </div>
+                        <div class="info">
+                            <!--用户名及权限-->
+                            <a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
+								<span>
+									[[${session.uid}]]
+									<span class="user-level">Administrator</span>
+									<span class="caret"></span>
+								</span>
+                            </a>
+                            <div class="clearfix"></div>
+
+                            <!--头像区域选项列表-->
+                            <div class="collapse in" id="collapseExample">
+                                <ul class="nav">
+                                    <li>
+                                        <a href="#profile">
+                                            <span class="link-collapse">My Profile</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#edit">
+                                            <span class="link-collapse">Edit Profile</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#settings">
+                                            <span class="link-collapse">Settings</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--左侧选项列表-->
+                    <ul class="nav nav-primary">
+                        <!--背景主题选择-->
+                        <li class="nav-item active">
+                            <a data-toggle="collapse" href="#dashboard" class="collapsed" aria-expanded="false">
+                                <i class="fas fa-home"></i>
+                                <p>Dashboard</p>
+                                <span class="caret"></span>
+                            </a>
+                            <div class="collapse" id="dashboard">
+                                <ul class="nav nav-collapse">
+                                    <li>
+                                        <a href="">
+                                            <span class="sub-item">Dashboard 1</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="">
+                                            <span class="sub-item">Dashboard 2</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <!--标题-->
+                        <li class="nav-section">
+							<span class="sidebar-mini-icon">
+								<i class="fa fa-ellipsis-h"></i>
+							</span>
+                            <h4 class="text-section">Options</h4>
+                        </li>
+                        <!--个人信息-->
+                        <li class="nav-item submenu" >
+                            <a data-toggle="collapse" href="#person">
+                                <i class="fas fa-layer-group"></i>
+                                <p>个人信息</p>
+                                <span class="caret"></span>
+                            </a>
+                            <div th:class="${first=='person'?'collapse show':'collapse'}" id="person">
+                                <ul class="nav nav-collapse">
+                                    <li th:class="${second=='display'?'active':''}">
+                                        <a th:href="@{/user/person}">
+                                            <span class="sub-item">显示个人信息</span>
+                                        </a>
+                                    </li>
+                                    <li th:class="${second=='alter'?'active':''}">
+                                        <a th:href="@{/user/alter/}+${session.uid}">
+                                            <span class="sub-item">修改个人信息</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <!--金额管理-->
+                        <li class="nav-item">
+                            <a data-toggle="collapse" href="#amount">
+                                <i class="fas fa-th-list"></i>
+                                <p>金额管理</p>
+                                <span class="caret"></span>
+                            </a>
+                            <div th:class="${first=='amount'?'collapse show':'collapse'}" id="amount">
+                                <ul class="nav nav-collapse">
+                                    <li th:class="${second=='display'?'active':''}">
+                                        <a th:href="@{/amount/display}">
+                                            <span class="sub-item">余额</span>
+                                        </a>
+                                    </li>
+                                    <li >
+                                        <a href="">
+                                            <span class="sub-item">存款</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="">
+                                            <span class="sub-item">取款</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="">
+                                            <span class="sub-item">转账</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <!--银行卡管理-->
+                        <li class="nav-item">
+                            <a data-toggle="collapse" href="#forms">
+                                <i class="fas fa-pen-square"></i>
+                                <p>银行卡管理</p>
+                                <span class="caret"></span>
+                            </a>
+                            <div class="collapse" id="forms">
+                                <ul class="nav nav-collapse">
+                                    <li>
+                                        <a href="">
+                                            <span class="sub-item">添加银行卡</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="">
+                                            <span class="sub-item">注销银行卡</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <!--日志记录-->
+                        <li class="nav-item">
+                            <a data-toggle="collapse" href="#maps">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <p>日志记录</p>
+                                <span class="caret"></span>
+                            </a>
+                            <div class="collapse" id="maps">
+                                <ul class="nav nav-collapse">
+                                    <li>
+                                        <a href="">
+                                            <span class="sub-item">查询日志</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="">
+                                            <span class="sub-item">全部日志</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <!--设置-->
+                        <li class="nav-item">
+                            <a data-toggle="collapse" href="#tables">
+                                <i class="fas fa-table"></i>
+                                <p>设置</p>
+                                <span class="caret"></span>
+                            </a>
+                            <div class="collapse" id="tables">
+                                <ul class="nav nav-collapse">
+                                    <li>
+                                        <a href="">
+                                            <span class="sub-item">修改头像</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="">
+                                            <span class="sub-item">Null</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li class="mx-4 mt-2">
+                            <a href="#" class="btn btn-primary btn-block"><span class="btn-label mr-2"> <i class="fa fa-heart"></i> </span>退出</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+</html>
