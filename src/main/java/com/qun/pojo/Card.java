@@ -10,11 +10,11 @@ package com.qun.pojo;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.sql.Timestamp;
 
 @Data
 public class Card implements Serializable {
-    private Long cid;
-    private float amount;
-    private Date date;
+    private long cid;
+    private double amount;
+    private Timestamp date;
 }

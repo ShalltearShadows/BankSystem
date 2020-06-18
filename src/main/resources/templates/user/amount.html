@@ -24,15 +24,17 @@
                 <td th:text="${card.getAmount()}"></td>
                 <td th:text="${#dates.format(card.getDate(),'yyyy-MM-dd HH:mm:ss')}"></td>
                 <td>
-<!--                    <a class="btn btn-sm btn-primary"-->
-<!--                       th:href="@{/user/update/}+${user.uid}">&nbsp;alter&nbsp;</a>-->
-<!--                    <a class="btn btn-sm btn-danger"-->
-<!--                       th:href="@{/user/delete/}+${user.uid}">&nbsp;delete&nbsp;</a>-->
+                    <a class="btn btn-sm btn-primary"
+                       th:href="@{/amount/deposit/}+${card.cid}">&nbsp;存款&nbsp;</a>
+                    <a class="btn btn-sm btn-danger"
+                       th:href="@{/amount/withdraw/}+${card.cid}">&nbsp;取款&nbsp;</a>
                 </td>
             </tr>
             </tbody>
         </table>
     </div>
     </main>
+
+    <div th:replace="~{commons/jsdoc.html::jsdoc}"></div>
 </body>
 </html>

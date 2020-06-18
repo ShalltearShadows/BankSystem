@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qun.mapper.CardMapper">
+    <!--  缓存  -->
+    <cache/>
+
+    <select id="getCard" resultType="Card">
+        select * from card
+        where cid = #{cid}
+    </select>
+
+    <delete id="deleteCard" parameterType="int">
+        delete from card where cid = #{cid}
+    </delete>
+
+    <update id="updateCard" parameterType="Card">
+        update card set amount=#{amount} where cid = #{cid}
+    </update>
+
+</mapper>
