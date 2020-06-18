@@ -134,20 +134,20 @@
                         </li>
                         <!--银行卡管理-->
                         <li class="nav-item">
-                            <a data-toggle="collapse" href="#forms">
+                            <a data-toggle="collapse" href="#card">
                                 <i class="fas fa-pen-square"></i>
                                 <p>银行卡管理</p>
                                 <span class="caret"></span>
                             </a>
-                            <div class="collapse" id="forms">
+                            <div th:class="${first=='card'?'collapse show':'collapse'}" id="card">
                                 <ul class="nav nav-collapse">
-                                    <li>
-                                        <a href="">
+                                    <li th:class="${second=='add'?'active':''}">
+                                        <a th:href="@{/card/add}">
                                             <span class="sub-item">添加银行卡</span>
                                         </a>
                                     </li>
-                                    <li>
-                                        <a href="">
+                                    <li th:class="${second=='delete'?'active':''}">
+                                        <a th:href="@{/card/delete}">
                                             <span class="sub-item">注销银行卡</span>
                                         </a>
                                     </li>
@@ -156,20 +156,20 @@
                         </li>
                         <!--日志记录-->
                         <li class="nav-item">
-                            <a data-toggle="collapse" href="#maps">
+                            <a data-toggle="collapse" href="#log">
                                 <i class="fas fa-map-marker-alt"></i>
                                 <p>日志记录</p>
                                 <span class="caret"></span>
                             </a>
-                            <div class="collapse" id="maps">
+                            <div th:class="${first=='log'?'collapse show':'collapse'}" id="log">
                                 <ul class="nav nav-collapse">
-                                    <li>
-                                        <a href="">
+                                    <li th:class="${second=='query'?'active':''}">
+                                        <a th:href="@{/log/query}">
                                             <span class="sub-item">查询日志</span>
                                         </a>
                                     </li>
-                                    <li>
-                                        <a href="">
+                                    <li th:class="${second=='all'?'active':''}">
+                                        <a th:href="@{/log/all}">
                                             <span class="sub-item">全部日志</span>
                                         </a>
                                     </li>
@@ -178,21 +178,21 @@
                         </li>
                         <!--设置-->
                         <li class="nav-item">
-                            <a data-toggle="collapse" href="#tables">
+                            <a data-toggle="collapse" href="#setting">
                                 <i class="fas fa-table"></i>
                                 <p>设置</p>
                                 <span class="caret"></span>
                             </a>
-                            <div class="collapse" id="tables">
+                            <div th:class="${first=='setting'?'collapse show':'collapse'}" id="setting">
                                 <ul class="nav nav-collapse">
-                                    <li>
+                                    <li th:class="${second=='head'?'active':''}">
                                         <a href="">
                                             <span class="sub-item">修改头像</span>
                                         </a>
                                     </li>
-                                    <li>
+                                    <li th:class="${second=='password'?'active':''}">
                                         <a href="">
-                                            <span class="sub-item">Null</span>
+                                            <span class="sub-item">修改密码</span>
                                         </a>
                                     </li>
                                 </ul>
@@ -200,7 +200,7 @@
                         </li>
 
                         <li class="mx-4 mt-2">
-                            <a href="#" class="btn btn-primary btn-block"><span class="btn-label mr-2"> <i class="fa fa-heart"></i> </span>退出</a>
+                            <a href="/user/logout" class="btn btn-primary btn-block"><span class="btn-label mr-2"> <i class="fa fa-heart"></i> </span>退出</a>
                         </li>
                     </ul>
                 </div>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Dashboard Template for Bootstrap</title>
+    <div th:replace="~{commons/headdoc.html::headdoc}"></div>
+</head>
+<body>
+
+<div th:replace="~{commons/topbar.html::topbar}"></div>
+<div class="container-fluid">
+    <div class="row">
+
+        <div th:replace="~{commons/sidebar.html::sidebar(first='card',second='add')}"></div>
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+            <form th:action="@{/card/add}" method="post">
+                <div class="form-group">
+                    <label>请输入密码</label>
+                    <input type="text" class="form-control" name="pwd">
+                </div>
+
+                <div class="form-group">
+                    <label>请重新输入密码</label>
+                    <input type="text" class="form-control" name="pwd2">
+                </div>
+
+                <button type="submit" class="btn btn-primary">确定</button>
+            </form>
+        </main>
+    </div>
+</div>
+<div th:replace="~{commons/jsdoc.html::jsdoc}"></div>
+
+</body>
+</html>

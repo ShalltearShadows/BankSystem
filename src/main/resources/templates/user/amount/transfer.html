@@ -10,17 +10,27 @@
 <div class="container-fluid">
     <div class="row">
 
-        <div th:replace="~{commons/sidebar.html::sidebar(first='amount',second='withdraw')}"></div>
+        <div th:replace="~{commons/sidebar.html::sidebar(first='amount',second='deposit')}"></div>
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-            <form th:action="@{/amount/withdraw}" method="post">
-                <div class="form-group">
-                    <label>银行卡号</label>
-                    <input type="text" name="cid" th:value="${cid}">
+            <form th:action="@{/amount/transfer}" method="post">
+                <div class="form-group" >
+                    <label>转出卡号</label>
+                    <select class="form-control" name="cid1">
+                        <option th:each="card:${cards}"
+                                th:text="${card.getCid()}"
+                                th:value="${card.getCid()}">
+                        </option>
+                    </select>
                 </div>
 
                 <div class="form-group">
-                    <label>请输入取款金额</label>
+                    <label>转入卡号</label>
+                    <input type="text" class="form-control" name="cid2">
+                </div>
+
+                <div class="form-group">
+                    <label>请输入转账金额</label>
                     <input type="text" class="form-control" name="amount">
                 </div>
 

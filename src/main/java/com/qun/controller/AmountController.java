@@ -27,7 +27,6 @@ public class AmountController {
     @Autowired
     private CardMapper cardMapper;
 
-    private HttpSession session;
 
     @GetMapping("/display")
     public String amount(Model model, HttpSession session){
@@ -40,7 +39,7 @@ public class AmountController {
     }
 
     @GetMapping("/deposit")
-    public String depositTwo(Model model){
+    public String depositTwo(){
         return "user/deposit";
     }
 
@@ -53,7 +52,7 @@ public class AmountController {
     }
 
     @PostMapping("/deposit")
-    public String depositAmount(@RequestParam("cid") Long cid,@RequestParam("amount") double amount,Model model){
+    public String deposit(@RequestParam("cid") Long cid,@RequestParam("amount") double amount,Model model){
 
         Card card = cardMapper.getCard(cid);
 
@@ -72,7 +71,7 @@ public class AmountController {
     }
 
     @GetMapping("/withdraw")
-    public String withdrawTwo(String id,Model model){
+    public String withdrawTwo(){
         return "user/withdraw";
     }
 
@@ -85,7 +84,7 @@ public class AmountController {
     }
 
     @PostMapping("/withdraw")
-    public String withdrawAmount(@RequestParam("cid") Long cid,@RequestParam("amount") double amount,Model model){
+    public String withdraw(@RequestParam("cid") Long cid,@RequestParam("amount") double amount,Model model){
         Card card = cardMapper.getCard(cid);
 
         double flag = card.getAmount();
@@ -104,7 +103,8 @@ public class AmountController {
     }
 
     @GetMapping("/transfer")
-    public String transfer(Model model){
+    public String transfer(Model model,HttpSession session){
+
         int uid = (int)session.getAttribute("uid");
         User user = userMapper.getUserByID(uid);
         model.addAttribute("cards",user.getCards());
@@ -113,7 +113,7 @@ public class AmountController {
     }
 
     @PostMapping("/transfer")
-    public String transferAmount(@RequestParam("cid1") Long cid1,@RequestParam("cid2") Long cid2,
+    public String transfer(@RequestParam("cid1") Long cid1,@RequestParam("cid2") Long cid2,
                                  @RequestParam("amount") double amount,Model model){
 
         Card card1 = cardMapper.getCard(cid1);
@@ -133,5 +133,11 @@ public class AmountController {
         }
 
         return "redirect:/amount/display";
+    }
+
+
+    @ExceptionHandler(NullPointerException.class)
+    public String Null(){
+        return "null";
     }
 }

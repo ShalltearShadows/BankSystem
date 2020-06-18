@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Dashboard Template for Bootstrap</title>
+    <div th:replace="~{commons/headdoc.html::headdoc}"></div>
+</head>
+<body>
+
+<div th:replace="~{commons/topbar.html::topbar}"></div>
+<div class="container-fluid">
+    <div class="row">
+
+        <div th:replace="~{commons/sidebar.html::sidebar(first='card',second='delete')}"></div>
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+            <form th:action="@{/card/delete}" method="post">
+                <div class="form-group" >
+                    <label>请选择卡号</label>
+                    <select class="form-control" name="cid1">
+                        <option th:each="card:${cards}"
+                                th:text="${card.getCid()}"
+                                th:value="${card.getCid()}">
+                        </option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary">确定</button>
+            </form>
+        </main>
+    </div>
+</div>
+<div th:replace="~{commons/jsdoc.html::jsdoc}"></div>
+
+</body>
+</html>

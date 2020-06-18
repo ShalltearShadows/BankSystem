@@ -11,8 +11,9 @@ import lombok.Data;
 
 @Data
 public class Admin {
-    private String aid;
+    private int aid;
     private String apwd;
     private String aname;
-    private String aphone;
+    private int aphone;
+    private int gender;
 }

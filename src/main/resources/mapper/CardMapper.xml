@@ -17,4 +17,7 @@
         update card set amount=#{amount} where cid = #{cid}
     </update>
 
+    <insert id="addCard">
+        insert into card (uid) values (#{uid})
+    </insert>
 </mapper>

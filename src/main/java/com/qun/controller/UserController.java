@@ -18,7 +18,7 @@ public class UserController {
 
     private HttpSession session;
 
-
+    //TODO 管理员查看所有用户功能
     @RequestMapping("/users")
     public String list(Model model){
         Collection<User> users = userMapper.queryUserList();

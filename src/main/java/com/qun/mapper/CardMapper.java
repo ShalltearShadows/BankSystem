@@ -18,4 +18,5 @@ public interface CardMapper {
     Card getCard(@Param("cid") long cid);
     int deleteCard(@Param("cid") long cid);
     int updateCard(Card card);
+    int addCard(int uid);
 }
