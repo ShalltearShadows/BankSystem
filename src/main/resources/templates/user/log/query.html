@@ -13,37 +13,55 @@
 <div class="container-fluid">
     <div class="row">
 
-        <div th:replace="~{commons/sidebar.html::sidebar}"></div>
+        <div th:replace="~{commons/sidebar.html::sidebar(first='log',second='query')}"></div>
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+
+
+            <form th:action="@{/user/query/id}" method="post">
+                <div class="form-group">
+                    <label>按卡号查询</label>
+                    <select class="form-control" name="cid">
+                        <option th:each="card:${cards}"
+                                th:text="${card.getCid()}"
+                                th:value="${card.getCid()}">
+                        </option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary">修改</button>
+            </form>
+
+            <form th:action="@{/user/query}" method="post">
+                <div class="form-group">
+                    <label>按日期查询</label>
+                </div>
+
+                <button type="submit" class="btn btn-primary">修改</button>
+            </form>
+
+
 
             <div class="table-responsive">
                 <table class="table table-striped table-sm">
                     <thead>
                     <tr>
-                        <th>id</th>
-                        <th>lastName</th>
-                        <th>email</th>
-                        <th>gender</th>
-                        <th>department</th>
-                        <th>birth</th>
-                        <th>operation</th>
+                        <th>编号</th>
+                        <th>转入卡</th>
+                        <th>转出卡</th>
+                        <th>金额</th>
+                        <th>类型</th>
+                        <th>日期</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="emp:${emps}">
-                        <td th:text="${emp.getId()}"></td>
-                        <td th:text="${emp.getLastName()}"></td>
-                        <td th:text="${emp.getEmail()}"></td>
-                        <td th:text="${emp.getGender()==0?'女':'男'}"></td>
-                        <td th:text="${emp.getDepartment().getDepartmentName()}"></td>
-                        <td th:text="${#dates.format(emp.getBirth(),'yyyy-MM-dd HH:mm:ss')}"></td>
-                        <td>
-                            <a class="btn btn-sm btn-primary"
-                               th:href="@{/emp/}+${emp.id}">&nbsp;alter&nbsp;</a>
-                            <a class="btn btn-sm btn-danger"
-                               th:href="@{/delete/}+${emp.id}">delete</a>
-                        </td>
+                    <tr th:each="log:${logs}">
+                        <td th:text="${log.getLid()}"></td>
+                        <td th:text="${log.getCid1()}"></td>
+                        <td th:text="${log.getCid2()}"></td>
+                        <td th:text="${log.getAmount()}"></td>
+                        <td th:text="${log.getOperation()}"></td>
+                        <td th:text="${#dates.format(log.getDate(),'yyyy-MM-dd HH:mm:ss')}"></td>
                     </tr>
                     </tbody>
                 </table>

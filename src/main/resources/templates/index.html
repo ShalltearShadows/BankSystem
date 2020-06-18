@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -8,13 +8,16 @@
 	<title>Signin Template for Bootstrap</title>
 	<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
 	<link th:href="@{/css/signin.css}" rel="stylesheet">
+
+	<script type="text/javascript" src="/js/sky/ThreeWebGL.js"></script>
+	<script type="text/javascript" src="/js/sky/ThreeExtras.js"></script>
+	<script type="text/javascript" src="/js/sky/Detector.js"></script>
 </head>
 
 <body class="text-center">
 
-	<div>
+	<div class="frame">
 		<form class="form-signin" th:action="@{/user/login}" method="post">
-			<img class="mb-4" th:src="@{/img/bootstrap-solid.svg}" alt="" width="72" height="72">
 			<h1 class="h3 mb-3 font-weight-normal" th:text="#{login.tip}">Please sign in</h1>
 			<!-- 如果msg不为空，显示这行代码 -->
 			<p style="color: red" th:text="${msg}" th:if="${not #strings.isEmpty(msg)}"></p>
@@ -34,7 +37,14 @@
 		</form>
 	</div>
 
+	<script id="vs" type="x-shader/x-vertex">
+		varying vec2 vUv; void main() { vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 ); }
+	</script>
+	<script id="fs" type="x-shader/x-fragment">
+		uniform sampler2D map; uniform vec3 fogColor; uniform float fogNear; uniform float fogFar; varying vec2 vUv; void main() { float depth = gl_FragCoord.z / gl_FragCoord.w; float fogFactor = smoothstep( fogNear, fogFar, depth ); gl_FragColor = texture2D( map, vUv ); gl_FragColor.w *= pow( gl_FragCoord.z, 20.0 ); gl_FragColor = mix( gl_FragColor, vec4( fogColor, gl_FragColor.w ), fogFactor ); }
+	</script>
 
+	<script type="text/javascript" src="/js/sky/sky.js"></script>
 </body>
 
 </html>

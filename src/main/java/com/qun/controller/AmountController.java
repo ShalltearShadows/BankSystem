@@ -35,12 +35,12 @@ public class AmountController {
         User user = userMapper.getUserByID(uid);
         model.addAttribute("cards",user.getCards());
 
-        return "user/amount";
+        return "user/amount/amount";
     }
 
     @GetMapping("/deposit")
     public String depositTwo(){
-        return "user/deposit";
+        return "user/amount/deposit";
     }
 
     @GetMapping("/deposit/{cid}")
@@ -48,7 +48,7 @@ public class AmountController {
 
         model.addAttribute("cid",id);
 
-        return "user/deposit";
+        return "user/amount/deposit";
     }
 
     @PostMapping("/deposit")
@@ -64,7 +64,7 @@ public class AmountController {
 
         if (res!=1){
             model.addAttribute("存款失败","msg");
-            return "user/deposit";
+            return "user/amount/deposit";
         }
 
         return "redirect:/amount/display";
@@ -72,7 +72,7 @@ public class AmountController {
 
     @GetMapping("/withdraw")
     public String withdrawTwo(){
-        return "user/withdraw";
+        return "user/amount/withdraw";
     }
 
     @GetMapping("/withdraw/{cid}")
@@ -80,7 +80,7 @@ public class AmountController {
 
         model.addAttribute("cid",id);
 
-        return "user/withdraw";
+        return "user/amount/withdraw";
     }
 
     @PostMapping("/withdraw")
@@ -96,7 +96,7 @@ public class AmountController {
 
         if (res!=1){
             model.addAttribute("取款失败","msg");
-            return "user/withdraw";
+            return "user/amount/withdraw";
         }
 
         return "redirect:/amount/display";
@@ -109,7 +109,7 @@ public class AmountController {
         User user = userMapper.getUserByID(uid);
         model.addAttribute("cards",user.getCards());
 
-        return "user/transfer";
+        return "user/amount/transfer";
     }
 
     @PostMapping("/transfer")
@@ -129,7 +129,7 @@ public class AmountController {
 
         if (res!=1){
             model.addAttribute("转账失败","msg");
-            return "user/withdraw";
+            return "user/amount/withdraw";
         }
 
         return "redirect:/amount/display";

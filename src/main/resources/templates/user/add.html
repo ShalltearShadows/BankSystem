@@ -45,7 +45,7 @@
 	<div class="container-fluid">
 		<div class="row">
 
-			<div th:replace="~{commons/commons.html::sidebar(active='list')}"></div>
+			<div th:replace="~{commons/commons.html::sidebar(first='log',second='all')}"></div>
 
 			<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
 				<form th:action="@{/emp}" method="post">

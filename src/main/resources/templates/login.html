@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/css/login.css">
+    <title>The User Login</title>
+    <script type="text/javascript" src="js/core/jquery.3.2.1.min.js"></script>
+</head>
+<body>
+
+<div class="content">
+    <div id="pane" class="flip">
+        <div id="login" class="front">
+            <form action="" onsubmit="return checkcode();" class="container">
+                <h2>Admin Login</h2>
+                <div class="row100">
+                    <div class="col">
+                        <div class="inputBox">
+                            <input type="text" name="uid" required="required">
+                            <span class="text">Account</span>
+                            <span class="line"></span>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="inputBox">
+                            <input type="password" name="pwd" required="required">
+                            <span class="text">Password</span>
+                            <span class="line"></span>
+                        </div>
+                    </div>
+                </div>
+                <!--        验证码        -->
+                <!--                <div class="row100">-->
+                <!--                    <div class="col">-->
+                <!--                        <div class="inputBox">-->
+                <!--                            <input id="validate" name="code" maxlength="4" type='text'  autocomplete="off" required="required" style="width: 300px;">-->
+                <!--                            <span class="text">Vlidate</span><canvas class="J_codeimg" id="myCanvas"></canvas>-->
+                <!--                            <span class="line"></span>-->
+                <!--                        </div>-->
+                <!--                    </div>-->
+                <!--                </div>-->
+                <div class="row100">
+                    <div class="col">
+                        <input type="submit" value="Login" style="margin-left: 36px;"/>
+                        <input id="registerbtn" type="button" value="register" style="padding: 7px 23px;margin-left: 125px"/>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div id="register" class="back">
+            <form action=""  class="container" method="post">
+                <h2>User Register</h2>
+                <div class="row100">
+                    <div class="col" style="top:15px;">
+                        <div class="inputBox">
+                            <input type="text" name="uname" required="required">
+                            <span class="text">Name</span>
+                            <span class="line"></span>
+                        </div>
+                    </div>
+                    <div class="col" style="top:25px;">
+                        <div class="inputBox" >
+                            <input type="text" name="phone" required="required">
+                            <span class="text">Phone</span>
+                            <span class="line"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row100">
+                    <div class="col" style="top:50px;">
+                        <input id="loginbtn" type="button" value="Login" style="margin-left: 36px;">
+                        <input type="submit" value="Register" style="padding: 7px 23px;margin-left: 125px"/>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>
