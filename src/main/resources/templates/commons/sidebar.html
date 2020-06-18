@@ -124,8 +124,8 @@
                                             <span class="sub-item">取款</span>
                                         </a>
                                     </li>
-                                    <li>
-                                        <a href="">
+                                    <li th:class="${second=='transfer'?'active':''}">
+                                        <a th:href="@{/amount/transfer}">
                                             <span class="sub-item">转账</span>
                                         </a>
                                     </li>

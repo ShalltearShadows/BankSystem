@@ -39,6 +39,11 @@ public class AmountController {
         return "user/amount";
     }
 
+    @GetMapping("/deposit")
+    public String depositTwo(Model model){
+        return "user/deposit";
+    }
+
     @GetMapping("/deposit/{cid}")
     public String deposit(@PathVariable("cid") String id,Model model){
 
@@ -63,7 +68,12 @@ public class AmountController {
             return "user/deposit";
         }
 
-        return "redirect:/main";
+        return "redirect:/amount/display";
+    }
+
+    @GetMapping("/withdraw")
+    public String withdrawTwo(String id,Model model){
+        return "user/withdraw";
     }
 
     @GetMapping("/withdraw/{cid}")
@@ -90,6 +100,38 @@ public class AmountController {
             return "user/withdraw";
         }
 
-        return "redirect:/main";
+        return "redirect:/amount/display";
+    }
+
+    @GetMapping("/transfer")
+    public String transfer(Model model){
+        int uid = (int)session.getAttribute("uid");
+        User user = userMapper.getUserByID(uid);
+        model.addAttribute("cards",user.getCards());
+
+        return "user/transfer";
+    }
+
+    @PostMapping("/transfer")
+    public String transferAmount(@RequestParam("cid1") Long cid1,@RequestParam("cid2") Long cid2,
+                                 @RequestParam("amount") double amount,Model model){
+
+        Card card1 = cardMapper.getCard(cid1);
+        Card card2 = cardMapper.getCard(cid2);
+        double flag = card1.getAmount();
+        int res=0;
+        if (flag>=amount){
+            card1.setAmount(flag-amount);
+            res=cardMapper.updateCard(card1);
+            double am = card2.getAmount();
+            card2.setAmount(am+amount);
+        }
+
+        if (res!=1){
+            model.addAttribute("转账失败","msg");
+            return "user/withdraw";
+        }
+
+        return "redirect:/amount/display";
     }
 }

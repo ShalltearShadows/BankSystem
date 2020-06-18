@@ -3,20 +3,16 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.qun.mapper.UserMapper">
-    <!--  缓存  -->
-    <cache/>
 
     <select id="queryUserList" resultType="User">
         select * from user
     </select>
 
-
-
     <!-- 复杂对象的查询 -->
     <select id="getUserByID" resultMap="UserWithCards">
         select u.uid uid,uname,card_counts counts,gender,phone,cid,amount,date
             from user u,card c
-            where u.uid=#{uid}
+            where u.uid=#{uid} and c.uid=#{uid}
     </select>
     <resultMap id="UserWithCards" type="User">
         <result property="uid" column="uid"/>
@@ -36,9 +32,6 @@
     </resultMap>
 
 
-
-
-
     <select id="checkLogin">
         select * from user where uid = #{id} and upwd = #{pwd}
     </select>
@@ -54,8 +47,6 @@
     <delete id="deleteUser" parameterType="int">
         delete from user where uid = #{id}
     </delete>
-
-
 
 
 </mapper>

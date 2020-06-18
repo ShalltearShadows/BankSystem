@@ -35,7 +35,6 @@
 								<td th:text="${user.getUname()}"></td>
 								<td th:text="${user.getPhone()}"></td>
 								<td th:text="${user.getGender()==0?'女':'男'}"></td>
-<!--								<td th:text="${#dates.format(user.getCard1().getDate(),'yyyy-MM-dd HH:mm:ss')}"></td>-->
 								<td>
 									<a class="btn btn-sm btn-primary"
 									   th:href="@{/user/update/}+${user.uid}">&nbsp;alter&nbsp;</a>
