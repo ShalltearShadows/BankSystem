@@ -60,6 +60,19 @@ public class UserController {
         return "redirect:/emps";
     }
 
+    @GetMapping("/password")
+    public String password(){
+        return "user/password";
+    }
 
+    @PostMapping("/password")
+    public String password(@RequestParam("new") String password,Model model,HttpSession session){
+
+        int uid = (int) session.getAttribute("uid");
+
+        int flag = userMapper.alterPassword(uid,password);
+
+        return "user/password";
+    }
 
 }

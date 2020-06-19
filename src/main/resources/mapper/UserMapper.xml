@@ -48,5 +48,9 @@
         delete from user where uid = #{id}
     </delete>
 
+    <update id="alterPassword">
+        update user set upwd = #{pwd} where uid = #{uid}
+    </update>
+
 
 </mapper>

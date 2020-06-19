@@ -22,6 +22,8 @@ public interface UserMapper {
 
     int alterUser(User user);
 
-    void deleteUser(int id);
+    int deleteUser(int id);
+
+    int alterPassword(int uid,String pwd);
 
 }
