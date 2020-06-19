@@ -19,4 +19,5 @@ import java.util.List;
 @Repository
 public interface LogMapper {
     List<Log> queryAll(@Param("uid") int uid);
+    List<Log> queryByCid(@Param("cid") long cid);
 }

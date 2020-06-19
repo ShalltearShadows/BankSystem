@@ -16,7 +16,7 @@ public interface UserMapper {
 
     User getUserByID(@Param("uid") int id);
 
-    int checkLogin(int id,String pwd);
+    User checkLogin(int id,String pwd);
     
     int addUser(User user);
 

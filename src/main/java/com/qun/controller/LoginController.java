@@ -19,7 +19,7 @@ public class LoginController {
     @Autowired
     private UserMapper userMapper;
 
-    @GetMapping("/b")
+    @GetMapping("/admin")
     public String black(){
         return "login";
     }
@@ -28,7 +28,7 @@ public class LoginController {
     @PostMapping("/user/login")
     public String login(@RequestParam("uid") int uid, @RequestParam("pwd") String pwd, Model model, HttpSession session){
 
-        User user = userMapper.getUserByID(uid);
+        User user = userMapper.checkLogin(uid,pwd);
 
         if (user!=null){
             session.setAttribute("uid",uid);

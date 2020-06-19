@@ -8,4 +8,8 @@
         select * from log
     </select>
 
+    <select id="queryByCid" resultType="Log">
+        select * from log where cid1 = #{cid} or cid2 =#{cid}
+    </select>
+
 </mapper>

@@ -32,7 +32,7 @@
     </resultMap>
 
 
-    <select id="checkLogin">
+    <select id="checkLogin" resultType="User">
         select * from user where uid = #{id} and upwd = #{pwd}
     </select>
 
