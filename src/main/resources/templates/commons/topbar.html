@@ -25,7 +25,7 @@
         <!-- End Logo Header -->
 
         <!-- Navbar Header -->
-        <nav class="navbar navbar-header navbar-expand-lg" data-background-color="blue2">
+        <nav id="navbar" class="navbar navbar-header navbar-expand-lg" data-background-color="blue2">
 
             <div class="container-fluid">
                 <!--搜索框-->
@@ -145,29 +145,30 @@
                     <li class="nav-item dropdown hidden-caret">
                         <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false">
                             <div class="avatar-sm">
-                                <img th:src="@{/img/profile.jpg}" alt="..." class="avatar-img rounded-circle">
+                                <img src="/upload/2017001.jpg" alt="..." class="avatar-img rounded-circle">
                             </div>
                         </a>
                         <ul class="dropdown-menu dropdown-user animated fadeIn">
                             <div class="dropdown-user-scroll scrollbar-outer">
                                 <li>
                                     <div class="user-box">
-                                        <div class="avatar-lg"><img th:src="@{/img/profile.jpg}" alt="image profile" class="avatar-img rounded"></div>
+                                        <div class="avatar-lg"><img src="/upload/2017001.jpg" alt="image profile" class="avatar-img rounded"></div>
                                         <div class="u-text">
-                                            <h4>Hizrian</h4>
-                                            <p class="text-muted">hello@example.com</p><a href="#" class="btn btn-xs btn-secondary btn-sm">View Profile</a>
+                                            <h4>[[${session.name}]]</h4>
+                                            <!-- p->邮箱 -->
+                                            <p class="text-muted">&nbsp;</p>
+                                            <a href="/user/person" class="btn btn-xs btn-secondary btn-sm">View Profile</a>
                                         </div>
                                     </div>
                                 </li>
                                 <li>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">My Profile</a>
-                                    <a class="dropdown-item" href="#">My Balance</a>
-                                    <a class="dropdown-item" href="#">Inbox</a>
+                                    <a class="dropdown-item" href="/user/person">My Profile</a>
+                                    <a class="dropdown-item" th:href="@{/user/alter/}+${session.uid}">Edit Profile</a>
+                                    <a class="dropdown-item" href="/amount/display">My Amount</a>
+                                    <!-- 下划线 -->
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">Account Setting</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">Logout</a>
+                                    <a class="dropdown-item" href="/user/logout">Logout</a>
                                 </li>
                             </div>
                         </ul>

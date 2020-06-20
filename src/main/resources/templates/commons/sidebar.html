@@ -4,20 +4,20 @@
     <!-- 侧边栏 -->
     <nav class="heighten" th:fragment="sidebar(first,second)">
 
-        <div class="sidebar sidebar-style-2">
+        <div id="sidebar" class="sidebar sidebar-style-2">
             <div class="sidebar-wrapper scrollbar scrollbar-inner">
                 <div class="sidebar-content">
                     <!--头像区-->
                     <div class="user">
                         <!--头像-->
                         <div class="avatar-sm float-left mr-2">
-                            <img src="/img/profile.jpg" alt="..." class="avatar-img rounded-circle">
+                            <img src="/upload/2017001.jpg" alt="..." class="avatar-img rounded-circle">
                         </div>
                         <div class="info">
                             <!--用户名及权限-->
                             <a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
 								<span>
-									[[${session.uid}]]
+									[[${session.name}]]
 									<span class="user-level">Administrator</span>
 									<span class="caret"></span>
 								</span>
@@ -28,18 +28,18 @@
                             <div class="collapse in" id="collapseExample">
                                 <ul class="nav">
                                     <li>
-                                        <a href="#profile">
+                                        <a href="/user/person">
                                             <span class="link-collapse">My Profile</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#edit">
+                                        <a th:href="@{/user/alter/}+${session.uid}">
                                             <span class="link-collapse">Edit Profile</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#settings">
-                                            <span class="link-collapse">Settings</span>
+                                        <a href="/user/logout">
+                                            <span class="link-collapse">Logout</span>
                                         </a>
                                     </li>
                                 </ul>
@@ -59,13 +59,13 @@
                             <div class="collapse" id="dashboard">
                                 <ul class="nav nav-collapse">
                                     <li>
-                                        <a href="">
-                                            <span class="sub-item">Dashboard 1</span>
+                                        <a id="whiteboard">
+                                            <span class="sub-item">White Theme</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="">
-                                            <span class="sub-item">Dashboard 2</span>
+                                        <a id="blackboard">
+                                            <span class="sub-item">Black Theme</span>
                                         </a>
                                     </li>
                                 </ul>
@@ -81,7 +81,7 @@
                         <!--个人信息-->
                         <li class="nav-item" >
                             <a data-toggle="collapse" href="#person">
-                                <i class="fas fa-layer-group"></i>
+                                <i class="fas fa-user"></i>
                                 <p>个人信息</p>
                                 <span class="caret"></span>
                             </a>
@@ -103,7 +103,7 @@
                         <!--金额管理-->
                         <li class="nav-item">
                             <a data-toggle="collapse" href="#amount">
-                                <i class="fas fa-th-list"></i>
+                                <i class="fas fa-dollar-sign"></i>
                                 <p>金额管理</p>
                                 <span class="caret"></span>
                             </a>
@@ -135,7 +135,7 @@
                         <!--银行卡管理-->
                         <li class="nav-item">
                             <a data-toggle="collapse" href="#card">
-                                <i class="fas fa-pen-square"></i>
+                                <i class="fas fa-money-check-alt"></i>
                                 <p>银行卡管理</p>
                                 <span class="caret"></span>
                             </a>
@@ -179,7 +179,7 @@
                         <!--设置-->
                         <li class="nav-item">
                             <a data-toggle="collapse" href="#setting">
-                                <i class="fas fa-table"></i>
+                                <i class="fas fa-cog"></i>
                                 <p>设置</p>
                                 <span class="caret"></span>
                             </a>
@@ -200,7 +200,7 @@
                         </li>
 
                         <li class="mx-4 mt-2">
-                            <a href="/user/logout" class="btn btn-primary btn-block"><span class="btn-label mr-2"> <i class="fa fa-heart"></i> </span>退出</a>
+                            <a href="/user/logout" class="btn btn-primary btn-block"><span class="btn-label mr-2"> <i class="fa fa-power-off"></i> </span>退出</a>
                         </li>
                     </ul>
                 </div>

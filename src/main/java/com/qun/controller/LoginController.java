@@ -32,6 +32,7 @@ public class LoginController {
 
         if (user!=null){
             session.setAttribute("uid",uid);
+            session.setAttribute("name",user.getUname());
             return "redirect:/main";
         }else {
             model.addAttribute("msg","用户名或密码错误");
@@ -42,7 +43,7 @@ public class LoginController {
     @RequestMapping("/user/logout")
     public String logout(HttpSession session){
         session.invalidate();
-        return "redirect:index";
+        return "redirect:/index";
     }
 
 }

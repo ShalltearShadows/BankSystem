@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Dashboard Template for Bootstrap</title>
+    <div th:replace="~{commons/headdoc.html::headdoc}"></div>
+</head>
+<body>
+
+<div th:replace="~{commons/topbar.html::topbar}"></div>
+<div id="panel" class="container-fluid">
+    <div class="row">
+
+        <div th:replace="~{commons/sidebar.html::sidebar(first='person',second='alter')}"></div>
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+            <form th:action="@{/user/alter}" method="post" enctype="multipart/form-data">
+                <img src="/${goods.path}"/>
+
+                上传图片：<input type="file" name="file"/>
+                <button type="submit" class="btn btn-primary">修改</button>
+            </form>
+        </main>
+    </div>
+</div>
+<div th:replace="~{commons/jsdoc.html::jsdoc}"></div>
+
+</body>
+</html>

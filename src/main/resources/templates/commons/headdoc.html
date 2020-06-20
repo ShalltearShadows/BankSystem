@@ -16,6 +16,17 @@
     <link rel="stylesheet" th:href="@{/css/fonts.min.css}">
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link rel="stylesheet" th:href="@{/css/demo.css}">
+
+    <script>
+        //页面全部加载完在显示
+        document.onreadystatechange = function () {
+            if (document.readyState == "complete") {
+                document.body.style.display = "block";
+            } else {
+                document.body.style.display = "none";
+            };
+        };
+    </script>
 </nav>
 
 </html>

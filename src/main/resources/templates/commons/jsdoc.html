@@ -1,11 +1,17 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <script type="text/javascript" th:src="@{/js/core/jquery.3.2.1.min.js}"></script>
+
+</head>
+<body>
 
 <nav th:fragment="jsdoc">
     <!--   Core JS Files   -->
     <script th:src="@{/js/core/jquery.3.2.1.min.js}"></script>
     <script th:src="@{/js/core/popper.min.js}"></script>
     <script th:src="@{/js/core/bootstrap.min.js}"></script>
+    <script th:src="@{/js/core/jquery.cookie.js}"></script>
 
     <!-- jQuery UI -->
     <script th:src="@{/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js}"></script>
@@ -29,7 +35,43 @@
             }
         });
     </script>
+
+    <script>
+
+        if (($.cookie('theme'))=='white'){
+            $("#sidebar").attr("data-background-color","white")
+            $(".logo-header").attr("data-background-color","blue")
+            $("#navbar").attr("data-background-color","blue2")
+            $("#panel").attr("data-background-color","white")
+        }else {
+            $("#sidebar").attr("data-background-color","dark2")
+            $(".logo-header").attr("data-background-color","dark2")
+            $("#navbar").attr("data-background-color","dark")
+            $("#panel").attr("data-background-color","dark")
+        }
+
+        $(function () {
+            $("#whiteboard").click(function () {
+                $("#sidebar").attr("data-background-color","white")
+                $(".logo-header").attr("data-background-color","blue")
+                $("#navbar").attr("data-background-color","blue2")
+                $("#panel").attr("data-background-color","white")
+                $.cookie('theme','white',{ expires: 7, path: '/' })
+            })
+
+            $("#blackboard").click(function () {
+                $("#sidebar").attr("data-background-color","dark2")
+                $(".logo-header").attr("data-background-color","dark2")
+                $("#navbar").attr("data-background-color","dark")
+                $("#panel").attr("data-background-color","dark")
+                $.cookie('theme','black',{ expires: 7, path: '/' })
+            })
+        })
+
+
+    </script>
 </nav>
 
 
+</body>
 </html>
