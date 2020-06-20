@@ -16,14 +16,16 @@ public interface UserMapper {
 
     User getUserByID(@Param("uid") int id);
 
-    User checkLogin(int id,String pwd);
+    User checkLogin(@Param("uid") int id,String pwd);
     
     int addUser(User user);
 
     int alterUser(User user);
 
-    int deleteUser(int id);
+    int deleteUser(@Param("uid") int id);
 
-    int alterPassword(int uid,String pwd);
+    int alterPassword(@Param("uid") int uid,String pwd);
+
+    int setImg(@Param("uid") int uid,String img);
 
 }

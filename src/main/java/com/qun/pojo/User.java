@@ -20,5 +20,6 @@ public class User implements Serializable {
     private String phone;
     private int gender;
     private int cardCounts;
+    private String img;
     private List<Card> cards;
 }

@@ -33,6 +33,7 @@ public class LoginController {
         if (user!=null){
             session.setAttribute("uid",uid);
             session.setAttribute("name",user.getUname());
+            session.setAttribute("img",user.getImg());
             return "redirect:/main";
         }else {
             model.addAttribute("msg","用户名或密码错误");

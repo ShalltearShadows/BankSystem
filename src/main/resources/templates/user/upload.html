@@ -10,13 +10,26 @@
 <div id="panel" class="container-fluid">
     <div class="row">
 
-        <div th:replace="~{commons/sidebar.html::sidebar(first='person',second='alter')}"></div>
+        <div th:replace="~{commons/sidebar.html::sidebar(first='setting',second='head')}"></div>
+
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-            <form th:action="@{/user/alter}" method="post" enctype="multipart/form-data">
-                <img src="/${goods.path}"/>
+            <form action="/user/upload" method="post" enctype="multipart/form-data">
+                <div class="dropdown-divider"></div>
+                <h4>当前头像</h4>
+                <div class="avatar-lg">
+                    <img class="avatar-img rounded" th:src="@{/upload/}+${session.img}">
+                </div>
 
-                上传图片：<input type="file" name="file"/>
+                <div class="dropdown-divider"></div>
+
+                <h4>请选择头像</h4>
+                <div class="input-group" style="width: max-content">
+                    <input id="test1" required type="file" name="file" style="display: none" class="form-control hidden" onchange="document.getElementById('test2').value = this.value">
+                    <br>
+                    <input id="test2" type="text" style="width: 200px" class="btn form-control" value="请选择文件" onclick="document.getElementById('test1').click()">
+                </div>
+                <div class="dropdown-divider"></div>
                 <button type="submit" class="btn btn-primary">修改</button>
             </form>
         </main>

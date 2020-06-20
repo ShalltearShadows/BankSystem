@@ -145,14 +145,14 @@
                     <li class="nav-item dropdown hidden-caret">
                         <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false">
                             <div class="avatar-sm">
-                                <img src="/upload/2017001.jpg" alt="..." class="avatar-img rounded-circle">
+                                <img th:src="@{/upload/}+${session.img}+'?'+${#strings.randomAlphanumeric(5)}" alt="..." class="avatar-img rounded-circle">
                             </div>
                         </a>
                         <ul class="dropdown-menu dropdown-user animated fadeIn">
                             <div class="dropdown-user-scroll scrollbar-outer">
                                 <li>
                                     <div class="user-box">
-                                        <div class="avatar-lg"><img src="/upload/2017001.jpg" alt="image profile" class="avatar-img rounded"></div>
+                                        <div class="avatar-lg"><img th:src="@{/upload/}+${session.img}" alt="image profile" class="avatar-img rounded"></div>
                                         <div class="u-text">
                                             <h4>[[${session.name}]]</h4>
                                             <!-- p->邮箱 -->

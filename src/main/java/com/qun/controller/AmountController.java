@@ -8,9 +8,12 @@
 package com.qun.controller;
 
 import com.qun.mapper.CardMapper;
+import com.qun.mapper.LogMapper;
 import com.qun.mapper.UserMapper;
 import com.qun.pojo.Card;
+import com.qun.pojo.Log;
 import com.qun.pojo.User;
+import com.qun.service.LogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,6 +29,9 @@ public class AmountController {
 
     @Autowired
     private CardMapper cardMapper;
+
+    @Autowired
+    private LogMapper logMapper;
 
 
     @GetMapping("/display")
@@ -52,7 +58,7 @@ public class AmountController {
     }
 
     @PostMapping("/deposit")
-    public String deposit(@RequestParam("cid") Long cid,@RequestParam("amount") double amount,Model model){
+    public String deposit(@RequestParam("cid") Long cid,@RequestParam("amount") double amount,Model model,HttpSession session){
 
         Card card = cardMapper.getCard(cid);
 
@@ -61,6 +67,11 @@ public class AmountController {
         card.setAmount(flag+amount);
 
         int res = cardMapper.updateCard(card);
+
+        int uid = (int) session.getAttribute("uid");
+
+        Log log = LogService.depositLog(uid, cid, amount);
+        logMapper.addLog(log);
 
         if (res!=1){
             model.addAttribute("存款失败","msg");
@@ -84,7 +95,7 @@ public class AmountController {
     }
 
     @PostMapping("/withdraw")
-    public String withdraw(@RequestParam("cid") Long cid,@RequestParam("amount") double amount,Model model){
+    public String withdraw(@RequestParam("cid") Long cid,@RequestParam("amount") double amount,Model model,HttpSession session){
         Card card = cardMapper.getCard(cid);
 
         double flag = card.getAmount();
@@ -92,6 +103,9 @@ public class AmountController {
         if (flag>=amount){
             card.setAmount(flag-amount);
             res=cardMapper.updateCard(card);
+            int uid = (int) session.getAttribute("uid");
+            Log log = LogService.withdrawLog(uid, cid, amount);
+            logMapper.addLog(log);
         }
 
         if (res!=1){
@@ -109,12 +123,13 @@ public class AmountController {
         User user = userMapper.getUserByID(uid);
         model.addAttribute("cards",user.getCards());
 
+
         return "user/amount/transfer";
     }
 
     @PostMapping("/transfer")
     public String transfer(@RequestParam("cid1") Long cid1,@RequestParam("cid2") Long cid2,
-                                 @RequestParam("amount") double amount,Model model){
+                                 @RequestParam("amount") double amount,Model model,HttpSession session){
 
         Card card1 = cardMapper.getCard(cid1);
         Card card2 = cardMapper.getCard(cid2);
@@ -125,6 +140,10 @@ public class AmountController {
             res=cardMapper.updateCard(card1);
             double am = card2.getAmount();
             card2.setAmount(am+amount);
+
+            int uid = (int) session.getAttribute("uid");
+            Log log = LogService.tansferLog(uid, cid1, cid2, amount);
+            logMapper.addLog(log);
         }
 
         if (res!=1){
@@ -135,9 +154,4 @@ public class AmountController {
         return "redirect:/amount/display";
     }
 
-
-    @ExceptionHandler(NullPointerException.class)
-    public String Null(){
-        return "null";
-    }
 }

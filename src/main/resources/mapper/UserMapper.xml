@@ -33,7 +33,7 @@
 
 
     <select id="checkLogin" resultType="User">
-        select * from user where uid = #{id} and upwd = #{pwd}
+        select * from user where uid = #{uid} and upwd = #{pwd}
     </select>
 
     <insert id="addUser" parameterType="User">
@@ -45,11 +45,15 @@
     </update>
 
     <delete id="deleteUser" parameterType="int">
-        delete from user where uid = #{id}
+        delete from user where uid = #{uid}
     </delete>
 
     <update id="alterPassword">
         update user set upwd = #{pwd} where uid = #{uid}
+    </update>
+
+    <update id="setImg">
+        update user set img = #{img} where uid = #{uid}
     </update>
 
 

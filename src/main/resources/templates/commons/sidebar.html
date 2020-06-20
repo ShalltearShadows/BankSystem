@@ -11,7 +11,7 @@
                     <div class="user">
                         <!--头像-->
                         <div class="avatar-sm float-left mr-2">
-                            <img src="/upload/2017001.jpg" alt="..." class="avatar-img rounded-circle">
+                            <img th:src="@{/upload/}+${session.img}" alt="..." class="avatar-img rounded-circle">
                         </div>
                         <div class="info">
                             <!--用户名及权限-->
@@ -186,7 +186,7 @@
                             <div th:class="${first=='setting'?'collapse show':'collapse'}" id="setting">
                                 <ul class="nav nav-collapse">
                                     <li th:class="${second=='head'?'active':''}">
-                                        <a href="">
+                                        <a href="/user/head">
                                             <span class="sub-item">修改头像</span>
                                         </a>
                                     </li>

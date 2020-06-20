@@ -42,4 +42,42 @@ public class LogService {
             return logs;
         }
     }
+
+
+    public static Log depositLog(int uid,long cid,double amount){
+        Log log = new Log();
+
+        log.setUid(uid);
+        log.setCid1(cid);
+        log.setOperation("存款");
+        log.setDate(new Timestamp(System.currentTimeMillis()));
+        log.setAmount(amount);
+
+        return log;
+    }
+
+    public static Log withdrawLog(int uid,long cid,double amount){
+        Log log = new Log();
+
+        log.setUid(uid);
+        log.setCid2(cid);
+        log.setOperation("取款");
+        log.setDate(new Timestamp(System.currentTimeMillis()));
+        log.setAmount(amount);
+
+        return log;
+    }
+
+    public static Log tansferLog(int uid,long cid1,long cid2,double amount){
+        Log log = new Log();
+
+        log.setUid(uid);
+        log.setCid1(cid1);
+        log.setCid2(cid2);
+        log.setOperation("转账");
+        log.setDate(new Timestamp(System.currentTimeMillis()));
+        log.setAmount(amount);
+
+        return log;
+    }
 }

@@ -20,4 +20,5 @@ import java.util.List;
 public interface LogMapper {
     List<Log> queryAll(@Param("uid") int uid);
     List<Log> queryByCid(@Param("cid") long cid);
+    int addLog(Log log);
 }

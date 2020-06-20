@@ -13,7 +13,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Collection;
+
 
 @Controller
 @RequestMapping("/user")
@@ -27,7 +29,7 @@ public class UserController {
     public String list(Model model){
         Collection<User> users = userMapper.queryUserList();
         model.addAttribute("users",users);
-        return "user/list";
+        return "list";
     }
 
     @GetMapping("/person")
@@ -80,6 +82,20 @@ public class UserController {
         return "user/password";
     }
 
+
+    @GetMapping("/head")
+    public String img(Model model,HttpSession session){
+
+        int uid = (int) session.getAttribute("uid");
+
+        User user = userMapper.getUserByID(uid);
+
+        model.addAttribute("user",user);
+
+        return "user/upload";
+    }
+
+
     @RequestMapping("/upload")
     public String one(MultipartFile file, RedirectAttributes redirectAttributes, Model model,
                       HttpServletRequest request,HttpSession session) throws IOException {
@@ -90,17 +106,24 @@ public class UserController {
 
         redirectAttributes.addFlashAttribute("name",file.getOriginalFilename());
 
-        String realPath=request.getServletContext().getRealPath("/upload");
+        String realPath="D:\\Java\\BankSystem\\src\\main\\resources\\static\\upload";
+        //获取target/class里的文件
+        //String realPath = User.class.getClassLoader().getResource("./static/upload/").getPath();
+
 
         String name = file.getOriginalFilename();
         String suffix = name.substring(name.lastIndexOf(".") + 1);
 
         int uid = (int) session.getAttribute("uid");
-        File destFile=new File(realPath,uid+"."+suffix);
+        String img = uid+"."+suffix;
+        File destFile=new File(realPath,img);
+
+        userMapper.setImg(uid,img);
 
         file.transferTo(destFile);
 
         return "user/upload";
 
     }
+
 }
