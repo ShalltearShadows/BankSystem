@@ -11,7 +11,7 @@
                     <div class="user">
                         <!--头像-->
                         <div class="avatar-sm float-left mr-2">
-                            <img th:src="@{/upload/}+${session.img}" alt="..." class="avatar-img rounded-circle">
+                            <img th:src="@{/upload/}+${session.img}+'?'+${#strings.randomAlphanumeric(5)}" alt="..." class="avatar-img rounded-circle">
                         </div>
                         <div class="info">
                             <!--用户名及权限-->

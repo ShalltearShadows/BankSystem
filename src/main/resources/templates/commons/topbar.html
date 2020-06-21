@@ -152,7 +152,7 @@
                             <div class="dropdown-user-scroll scrollbar-outer">
                                 <li>
                                     <div class="user-box">
-                                        <div class="avatar-lg"><img th:src="@{/upload/}+${session.img}" alt="image profile" class="avatar-img rounded"></div>
+                                        <div class="avatar-lg"><img th:src="@{/upload/}+${session.img}+'?'+${#strings.randomAlphanumeric(5)}" alt="image profile" class="avatar-img rounded"></div>
                                         <div class="u-text">
                                             <h4>[[${session.name}]]</h4>
                                             <!-- p->邮箱 -->

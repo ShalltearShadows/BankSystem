@@ -18,7 +18,7 @@
                 <div class="dropdown-divider"></div>
                 <h4>当前头像</h4>
                 <div class="avatar-lg">
-                    <img class="avatar-img rounded" th:src="@{/upload/}+${session.img}">
+                    <img class="avatar-img rounded" th:src="@{/upload/}+${session.img}+'?'+${#strings.randomAlphanumeric(5)}">
                 </div>
 
                 <div class="dropdown-divider"></div>

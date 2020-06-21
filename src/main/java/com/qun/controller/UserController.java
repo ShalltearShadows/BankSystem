@@ -106,9 +106,8 @@ public class UserController {
 
         redirectAttributes.addFlashAttribute("name",file.getOriginalFilename());
 
-        String realPath="D:\\Java\\BankSystem\\src\\main\\resources\\static\\upload";
         //获取target/class里的文件
-        //String realPath = User.class.getClassLoader().getResource("./static/upload/").getPath();
+        String realPath = User.class.getClassLoader().getResource("./static/upload/").getPath();
 
 
         String name = file.getOriginalFilename();
@@ -116,11 +115,11 @@ public class UserController {
 
         int uid = (int) session.getAttribute("uid");
         String img = uid+"."+suffix;
-        File destFile=new File(realPath,img);
+        File webFile=new File(realPath,img);
 
         userMapper.setImg(uid,img);
 
-        file.transferTo(destFile);
+        file.transferTo(webFile);
 
         return "user/upload";
 
