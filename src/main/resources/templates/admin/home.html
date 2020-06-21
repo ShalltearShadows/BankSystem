@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Dashboard Template for Bootstrap</title>
+    <div th:replace="~{commons/headdoc.html::headdoc}"></div>
+</head>
+
+<body>
+
+<div th:replace="~{commons/topbar.html::topbar}"></div>
+<div  id="panel" class="container-fluid">
+    <div class="row">
+
+        <div th:replace="~{commons/sidebar.html::adminsidebar(first='home',second='0')}"></div>
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+            <div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+                <div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                    <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
+                </div>
+                <div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                    <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+                <h1 class="h2">Dashboard</h1>
+                <div class="btn-toolbar mb-2 mb-md-0">
+                    <div class="btn-group mr-2">
+                        <button class="btn btn-sm btn-outline-secondary">Share</button>
+                        <button class="btn btn-sm btn-outline-secondary">Export</button>
+                    </div>
+                    <button class="btn btn-sm btn-outline-secondary dropdown-toggle">This week</button>
+                </div>
+            </div>
+            <div>
+                <p>尊敬的用户您好！</p>
+                <p>欢迎来到银行账号管理系统</p>
+            </div>
+        </main>
+    </div>
+</div>
+
+<div th:replace="~{commons/jsdoc.html::jsdoc}"></div>
+
+</body>
+
+</html>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<!-- 侧边栏 -->
+<nav class="heighten" th:fragment="adminsidebar(first,second)">
+
+    <div id="sidebar" class="sidebar sidebar-style-2">
+        <div class="sidebar-wrapper scrollbar scrollbar-inner">
+            <div class="sidebar-content">
+                <!--头像区-->
+                <div class="user">
+                    <!--头像-->
+                    <div class="avatar-sm float-left mr-2">
+                        <img th:src="@{/upload/}+${session.img}+'?'+${#strings.randomAlphanumeric(5)}" alt="..." class="avatar-img rounded-circle">
+                    </div>
+                    <div class="info">
+                        <!--用户名及权限-->
+                        <a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
+								<span>
+									[[${session.name}]]
+									<span class="user-level">Administrator</span>
+									<span class="caret"></span>
+								</span>
+                        </a>
+                        <div class="clearfix"></div>
+
+                        <!--头像区域选项列表-->
+                        <div class="collapse in" id="collapseExample">
+                            <ul class="nav">
+                                <li>
+                                    <a href="/user/person">
+                                        <span class="link-collapse">My Profile</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a th:href="@{/user/alter/}+${session.uid}">
+                                        <span class="link-collapse">Edit Profile</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/user/logout">
+                                        <span class="link-collapse">Logout</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!--左侧选项列表-->
+                <ul class="nav nav-primary">
+                    <!--背景主题选择-->
+                    <li class="nav-item active">
+                        <a data-toggle="collapse" href="#dashboard" class="collapsed" aria-expanded="false">
+                            <i class="fas fa-home"></i>
+                            <p>Dashboard</p>
+                            <span class="caret"></span>
+                        </a>
+                        <div class="collapse" id="dashboard">
+                            <ul class="nav nav-collapse">
+                                <li>
+                                    <a id="whiteboard">
+                                        <span class="sub-item">White Theme</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a id="blackboard">
+                                        <span class="sub-item">Black Theme</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <!--标题-->
+                    <li class="nav-section">
+							<span class="sidebar-mini-icon">
+								<i class="fa fa-ellipsis-h"></i>
+							</span>
+                        <h4 class="text-section">Options</h4>
+                    </li>
+                    <!--个人信息-->
+                    <li class="nav-item" >
+                        <a data-toggle="collapse" href="#person">
+                            <i class="fas fa-user"></i>
+                            <p>个人信息</p>
+                            <span class="caret"></span>
+                        </a>
+                        <div th:class="${first=='person'?'collapse show':'collapse'}" id="person">
+                            <ul class="nav nav-collapse">
+                                <li th:class="${second=='display'?'active':''}">
+                                    <a th:href="@{/admin/person}">
+                                        <span class="sub-item">显示个人信息</span>
+                                    </a>
+                                </li>
+                                <li th:class="${second=='alter'?'active':''}">
+                                    <a th:href="@{/admin/alter/}+${session.uid}">
+                                        <span class="sub-item">修改个人信息</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <!--用户管理-->
+                    <li class="nav-item">
+                        <a data-toggle="collapse" href="#card">
+                            <i class="fas fa-money-check-alt"></i>
+                            <p>用户管理</p>
+                            <span class="caret"></span>
+                        </a>
+                        <div th:class="${first=='card'?'collapse show':'collapse'}" id="card">
+                            <ul class="nav nav-collapse">
+                                <li th:class="${second=='add'?'active':''}">
+                                    <a th:href="@{/admin/queryuser}">
+                                        <span class="sub-item">查询用户信息</span>
+                                    </a>
+                                </li>
+                                <li th:class="${second=='delete'?'active':''}">
+                                    <a th:href="@{/admin/alteruser}">
+                                        <span class="sub-item">修改用户信息</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <!--日志记录-->
+                    <li class="nav-item">
+                        <a data-toggle="collapse" href="#log">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <p>用户日志记录</p>
+                            <span class="caret"></span>
+                        </a>
+                        <div th:class="${first=='log'?'collapse show':'collapse'}" id="log">
+                            <ul class="nav nav-collapse">
+                                <li th:class="${second=='query'?'active':''}">
+                                    <a th:href="@{/log/query}">
+                                        <span class="sub-item">查询用户日志</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <!--设置-->
+                    <li class="nav-item">
+                        <a data-toggle="collapse" href="#setting">
+                            <i class="fas fa-cog"></i>
+                            <p>设置</p>
+                            <span class="caret"></span>
+                        </a>
+                        <div th:class="${first=='setting'?'collapse show':'collapse'}" id="setting">
+                            <ul class="nav nav-collapse">
+                                <li th:class="${second=='head'?'active':''}">
+                                    <a href="/admin/head">
+                                        <span class="sub-item">修改头像</span>
+                                    </a>
+                                </li>
+                                <li th:class="${second=='password'?'active':''}">
+                                    <a href="/admin/password">
+                                        <span class="sub-item">修改密码</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="mx-4 mt-2">
+                        <a href="/user/logout" class="btn btn-primary btn-block"><span class="btn-label mr-2"> <i class="fa fa-power-off"></i> </span>退出</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+
+</html>

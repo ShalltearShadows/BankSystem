@@ -9,11 +9,14 @@ package com.qun.pojo;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Data
-public class Admin {
+public class Admin implements Serializable {
     private int aid;
     private String apwd;
     private String aname;
-    private int aphone;
+    private int phone;
     private int gender;
+    private String img;
 }

@@ -1,6 +1,8 @@
 package com.qun.controller;
 
+import com.qun.mapper.AdminMapper;
 import com.qun.mapper.UserMapper;
+import com.qun.pojo.Admin;
 import com.qun.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,8 +21,10 @@ public class LoginController {
     @Autowired
     private UserMapper userMapper;
 
+    private AdminMapper adminMapper;
+
     @GetMapping("/admin")
-    public String black(){
+    public String adlogin(){
         return "login";
     }
 
@@ -45,6 +49,23 @@ public class LoginController {
     public String logout(HttpSession session){
         session.invalidate();
         return "redirect:/index";
+    }
+
+    @PostMapping("/admin/login")
+    public String adminLogin(@RequestParam("aid") int aid,@RequestParam("pwd") String pwd,Model model,HttpSession session){
+
+        Admin admin = adminMapper.checkLogin(aid,pwd);
+
+        if (admin!=null){
+            session.setAttribute("uid",aid);
+            session.setAttribute("name",admin.getAname());
+            session.setAttribute("img",admin.getImg());
+            return "admin/home";
+        }else {
+            model.addAttribute("msg","用户名或密码错误");
+            return "login";
+        }
+
     }
 
 }

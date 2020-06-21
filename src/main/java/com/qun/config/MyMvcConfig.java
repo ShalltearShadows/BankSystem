@@ -13,7 +13,7 @@ public class MyMvcConfig implements WebMvcConfigurer {
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/").setViewName("index");
         registry.addViewController("/index").setViewName("index");
-        registry.addViewController("/main").setViewName("dashboard");
+        registry.addViewController("/home").setViewName("home");
 //        registry.addViewController("/*").setViewName("404");
     }
 
@@ -28,7 +28,7 @@ public class MyMvcConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new LoginInterceptor())
                 .addPathPatterns("/**")//拦截所有请求
-                .excludePathPatterns("/","/admin","/user/login", "/index","/static/**",
+                .excludePathPatterns("/","/admin/login","/user/login", "/index","/static/**",
                         "/sky/**","/css/**","/js/**","/img/**");//除了这些
     }
 
