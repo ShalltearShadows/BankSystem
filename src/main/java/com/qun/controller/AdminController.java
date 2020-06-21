@@ -103,6 +103,16 @@ public class AdminController {
         return "admin/list";
     }
 
+    @GetMapping("/alteruserinfo")
+    public String alterUserInfo(Model model){
+
+        User user = new User();
+
+        model.addAttribute("user",user);
+
+        return "admin/alteruser";
+    }
+
     @GetMapping("/alteruser/{uid}")
     public String alterUser(@PathVariable("uid") Integer uid,Model model){
 

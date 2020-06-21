@@ -85,6 +85,11 @@ public class LogController {
         return "user/log/query";
     }
 
+    @GetMapping("/logadmin")
+    public String logadmin(){
+        return "admin/userlog";
+    }
+
     @PostMapping("/logadmin")
     public String logadmin(@RequestParam("uid") int uid, Model model,HttpSession session,
                         @RequestParam("date1") String date1,@RequestParam("date2") String date2){

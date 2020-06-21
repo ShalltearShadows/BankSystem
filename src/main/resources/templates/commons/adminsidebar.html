@@ -107,15 +107,15 @@
                             <p>用户管理</p>
                             <span class="caret"></span>
                         </a>
-                        <div th:class="${first=='card'?'collapse show':'collapse'}" id="card">
+                        <div th:class="${first=='user'?'collapse show':'collapse'}" id="card">
                             <ul class="nav nav-collapse">
-                                <li th:class="${second=='add'?'active':''}">
+                                <li th:class="${second=='display'?'active':''}">
                                     <a th:href="@{/admin/users}">
                                         <span class="sub-item">查询用户信息</span>
                                     </a>
                                 </li>
-                                <li th:class="${second=='delete'?'active':''}">
-                                    <a th:href="@{/admin/alteruser}">
+                                <li th:class="${second=='alter'?'active':''}">
+                                    <a th:href="@{/admin/alteruserinfo}">
                                         <span class="sub-item">修改用户信息</span>
                                     </a>
                                 </li>
@@ -132,7 +132,7 @@
                         <div th:class="${first=='log'?'collapse show':'collapse'}" id="log">
                             <ul class="nav nav-collapse">
                                 <li th:class="${second=='query'?'active':''}">
-                                    <a th:href="@{/log/query}">
+                                    <a th:href="@{/log/logadmin}">
                                         <span class="sub-item">查询用户日志</span>
                                     </a>
                                 </li>
