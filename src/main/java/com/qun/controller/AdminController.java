@@ -15,8 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.Collection;
+import java.util.*;
 
 
 @Controller
@@ -29,62 +28,118 @@ public class AdminController {
     @Autowired
     private AdminMapper adminMapper;
 
-    //TODO 管理员查看所有用户功能
-    @RequestMapping("/users")
-    public String list(Model model){
-        Collection<User> users = userMapper.queryUserList();
-        model.addAttribute("users",users);
-        return "list";
-    }
-
     @GetMapping("/person")
     public String person(Model model, HttpSession session){
-        int aid = (int) session.getAttribute("aid");
+        int aid = (int) session.getAttribute("uid");
         Admin admin=adminMapper.getAdminByID(aid);
         model.addAttribute("admin",admin);
         return "admin/person";
     }
 
-
     @GetMapping("/alter/{id}")
-    public String alter(@PathVariable("id") Integer id,Model model){
-        User user = userMapper.getUserByID(id);
-        model.addAttribute("user",user);
+    public String alter(@PathVariable("id") int id,Model model){
+        Admin admin = adminMapper.getAdminByID(id);
+        model.addAttribute("admin",admin);
 
-        return "user/alter";
+        return "admin/alter";
     }
 
     @PostMapping("/alter")
-    public String alter(User user,Model model,HttpSession session){
-        int flag=userMapper.alterUser(user);
-        session.setAttribute("name",user.getUname());
+    public String alter(Admin admin,Model model,HttpSession session){
+        int flag=adminMapper.alterAdmin(admin);
+        session.setAttribute("name",admin.getAname());
 
-        return "user/person";
-
+        return "admin/person";
     }
 
 
-    @GetMapping("/delete/{id}")
-    public String delete(@PathVariable("id") Integer id){
-
-        userMapper.deleteUser(id);
-
-        return "redirect:/emps";
+    //管理员查看所有用户功能
+    @GetMapping("/users")
+    public String list(Model model){
+        List<User> users = adminMapper.queryUserList();
+        model.addAttribute("users",users);
+        return "admin/list";
     }
+
+    @PostMapping("/name")
+    public String queryUser(@RequestParam("name") String name,Model model){
+
+        Set<User> set = new HashSet<>(adminMapper.roughQuery(name));
+
+        String[] names = name.split("");
+
+        for (String s : names) {
+            set.addAll(adminMapper.roughQuery(s));
+        }
+
+        List<User> users = new ArrayList<>(set);
+
+        Collections.sort(users);
+
+        model.addAttribute("users",users);
+
+        return "admin/list";
+    }
+
+    @PostMapping("/uid")
+    public String queryUser(@RequestParam("uid") Integer uid,Model model){
+
+        Set<User> set = new HashSet<>(adminMapper.roughQueryID(uid));
+
+        String id = uid+"";
+
+        String i1 = id.substring(0,id.length()-1);
+        String i2 = id.substring(id.length()-1);
+
+        set.addAll(adminMapper.roughQueryID(Integer.valueOf(i1)));
+        set.addAll(adminMapper.roughQueryID(Integer.valueOf(i2)));
+
+        List<User> users = new ArrayList<>(set);
+
+        Collections.sort(users);
+
+        model.addAttribute("users",users);
+
+        return "admin/list";
+    }
+
+    @GetMapping("/alteruser/{uid}")
+    public String alterUser(@PathVariable("uid") Integer uid,Model model){
+
+        if (uid!=null){
+            User user = userMapper.getUserByID(uid);
+            model.addAttribute("user",user);
+        }
+
+        return "admin/alteruser";
+    }
+
+    @PostMapping("/alteruser")
+    public String alteruser(User user,Model model){
+        int flag = userMapper.alterUser(user);
+        if (flag==1){
+            model.addAttribute("msg","修改成功");
+        }else {
+            model.addAttribute("msg","修改失败");
+        }
+
+        return "admin/alteruser";
+    }
+
 
     @GetMapping("/password")
     public String password(){
-        return "user/password";
+        return "admin/password";
     }
 
     @PostMapping("/password")
     public String password(@RequestParam("new") String password,Model model,HttpSession session){
 
-        int uid = (int) session.getAttribute("uid");
+        int aid = (int) session.getAttribute("uid");
 
-        int flag = userMapper.alterPassword(uid,password);
+        int flag = adminMapper.alterPassword(aid,password);
 
-        return "user/password";
+        return "admin/password";
     }
 
 
@@ -97,7 +152,7 @@ public class AdminController {
 
         model.addAttribute("user",user);
 
-        return "user/upload";
+        return "admin/upload";
     }
 
 
@@ -122,11 +177,13 @@ public class AdminController {
         String img = uid+"."+suffix;
         File webFile=new File(realPath,img);
 
-        userMapper.setImg(uid,img);
+        adminMapper.setImg(uid,img);
 
         file.transferTo(webFile);
 
-        return "user/upload";
+        session.setAttribute("img",img);
+
+        return "admin/upload";
 
     }
 

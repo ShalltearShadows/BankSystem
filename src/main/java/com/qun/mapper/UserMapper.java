@@ -12,8 +12,6 @@ import java.util.List;
 @Repository
 public interface UserMapper {
 
-    List<User> queryUserList();
-
     User getUserByID(@Param("uid") int id);
 
     User checkLogin(@Param("uid") int id,String pwd);

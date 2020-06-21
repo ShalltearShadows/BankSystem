@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="/css/login.css">
-    <title>The User Login</title>
+    <title>The Admin Login</title>
     <script type="text/javascript" src="js/core/jquery.3.2.1.min.js"></script>
 </head>
 <body>
@@ -11,12 +11,12 @@
 <div class="content">
     <div id="pane" class="flip">
         <div id="login" class="front">
-            <form action="" onsubmit="return checkcode();" class="container">
+            <form th:action="@{/admin/login}" method="post" class="container">
                 <h2>Admin Login</h2>
                 <div class="row100">
                     <div class="col">
                         <div class="inputBox">
-                            <input type="text" name="uid" required="required">
+                            <input type="text" name="aid" required="required">
                             <span class="text">Account</span>
                             <span class="line"></span>
                         </div>
@@ -39,6 +39,8 @@
                 <!--                        </div>-->
                 <!--                    </div>-->
                 <!--                </div>-->
+                <!-- 如果msg不为空，显示这行代码 -->
+                <p style="color: red" th:text="${msg}" th:if="${not #strings.isEmpty(msg)}"></p>
                 <div class="row100">
                     <div class="col">
                         <input type="submit" value="Login" style="margin-left: 36px;"/>

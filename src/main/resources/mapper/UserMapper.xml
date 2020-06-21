@@ -4,10 +4,6 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.qun.mapper.UserMapper">
 
-    <select id="queryUserList" resultType="User">
-        select * from user
-    </select>
-
     <!-- 复杂对象的查询 -->
     <select id="getUserByID" resultMap="UserWithCards">
         select u.uid uid,uname,card_counts counts,gender,phone,cid,amount,date

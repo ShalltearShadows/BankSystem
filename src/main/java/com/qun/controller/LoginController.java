@@ -4,6 +4,7 @@ import com.qun.mapper.AdminMapper;
 import com.qun.mapper.UserMapper;
 import com.qun.pojo.Admin;
 import com.qun.pojo.User;
+import com.qun.utils.SpringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,7 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.thymeleaf.util.StringUtils;
 
 import javax.servlet.http.HttpSession;
 
@@ -21,11 +21,12 @@ public class LoginController {
     @Autowired
     private UserMapper userMapper;
 
+    @Autowired
     private AdminMapper adminMapper;
 
     @GetMapping("/admin")
     public String adlogin(){
-        return "login";
+        return "admin";
     }
 
 
@@ -37,8 +38,9 @@ public class LoginController {
         if (user!=null){
             session.setAttribute("uid",uid);
             session.setAttribute("name",user.getUname());
-            session.setAttribute("img",user.getImg());
-            return "redirect:/main";
+            session.setAttribute("img",user.getImg()==null?"0.jpg":user.getImg());
+            session.setAttribute("permission",user.getPermission());
+            return "redirect:/home";
         }else {
             model.addAttribute("msg","用户名或密码错误");
             return "index";
@@ -59,11 +61,12 @@ public class LoginController {
         if (admin!=null){
             session.setAttribute("uid",aid);
             session.setAttribute("name",admin.getAname());
-            session.setAttribute("img",admin.getImg());
+            session.setAttribute("img",admin.getImg()==null?"0.jpg":admin.getImg());
+            session.setAttribute("permission",admin.getPermission());
             return "admin/home";
         }else {
             model.addAttribute("msg","用户名或密码错误");
-            return "login";
+            return "admin";
         }
 
     }

@@ -13,8 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.Collection;
 
 
 @Controller
@@ -23,14 +21,6 @@ public class UserController {
 
     @Autowired
     private UserMapper userMapper;
-
-    //TODO 管理员查看所有用户功能
-    @RequestMapping("/users")
-    public String list(Model model){
-        Collection<User> users = userMapper.queryUserList();
-        model.addAttribute("users",users);
-        return "list";
-    }
 
     @GetMapping("/person")
     public String person(Model model, HttpSession session){
@@ -55,16 +45,6 @@ public class UserController {
         session.setAttribute("name",user.getUname());
 
         return "user/person";
-
-    }
-
-
-    @GetMapping("/delete/{id}")
-    public String delete(@PathVariable("id") Integer id){
-
-        userMapper.deleteUser(id);
-
-        return "redirect:/emps";
     }
 
     @GetMapping("/password")
@@ -108,7 +88,7 @@ public class UserController {
 
         //获取target/class里的文件
         String realPath = User.class.getClassLoader().getResource("./static/upload/").getPath();
-
+        String nativePath="D:\\Java\\BankSystem\\src\\main\\resources\\static\\upload";
 
         String name = file.getOriginalFilename();
         String suffix = name.substring(name.lastIndexOf(".") + 1);
@@ -120,6 +100,7 @@ public class UserController {
         userMapper.setImg(uid,img);
 
         file.transferTo(webFile);
+        session.setAttribute("img",img);
 
         return "user/upload";
 

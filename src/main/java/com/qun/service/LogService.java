@@ -15,7 +15,7 @@ import java.sql.Timestamp;
 import java.util.List;
 
 public class LogService {
-    public static List<Log> queryLogsByCid(List<Log> logs, long cid, String t1,String t2){
+    public static List<Log> selectLogs(List<Log> logs, String t1,String t2){
 
         Timestamp d1 = TimeUtil.stringToStamp(t1);
         Timestamp d2 = TimeUtil.stringToStamp(t2);
@@ -37,7 +37,6 @@ public class LogService {
                     logs.remove(i);
                     i--;
                 }
-
             }
             return logs;
         }

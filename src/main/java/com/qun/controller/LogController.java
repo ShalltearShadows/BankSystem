@@ -21,9 +21,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.thymeleaf.util.StringUtils;
 
 import javax.servlet.http.HttpSession;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -63,16 +65,38 @@ public class LogController {
     }
 
     @PostMapping("/query")
-    public String query(@RequestParam("cid") long cid, Model model,HttpSession session,
+    public String query(@RequestParam("cid") Long cid, Model model,HttpSession session,
                         @RequestParam("date1") String date1,@RequestParam("date2") String date2){
 
         int uid = (int) session.getAttribute("uid");
 
-        //获取条件查询的logs
-        List<Log> logs = LogService.queryLogsByCid(logMapper.queryByCid(cid),cid,date1,date2);
+        List<Log> list,logs;
+
+        if (cid==null){
+            list = logMapper.queryAll(uid);
+        }else {
+            list = logMapper.queryByCid(cid);
+        }
+
+        logs = LogService.selectLogs(list,date1,date2);
 
         model.addAttribute("logs",logs);
 
-        return "/user/log/query";
+        return "user/log/query";
+    }
+
+    @PostMapping("/logadmin")
+    public String logadmin(@RequestParam("uid") int uid, Model model,HttpSession session,
+                        @RequestParam("date1") String date1,@RequestParam("date2") String date2){
+
+        List<Log> list,logs;
+
+        list = logMapper.queryAll(uid);
+
+        logs = LogService.selectLogs(list,date1,date2);
+
+        model.addAttribute("logs",logs);
+
+        return "admin/userlog";
     }
 }
