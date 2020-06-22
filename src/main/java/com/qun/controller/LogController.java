@@ -57,7 +57,7 @@ public class LogController {
     public String query(Model model, HttpSession session){
         int uid = (int) session.getAttribute("uid");
 
-        User user = userMapper.getUserByID(uid);
+        User user = userMapper.getUCByID(uid);
 
         model.addAttribute("cards",user.getCards());
 

@@ -56,7 +56,7 @@ public class CardController {
 
         int uid = (int) session.getAttribute("uid");
 
-        User user = userMapper.getUserByID(uid);
+        User user = userMapper.getUser(uid);
 
         model.addAttribute("cards",user.getCards());
 

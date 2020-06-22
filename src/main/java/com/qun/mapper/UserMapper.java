@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 public interface UserMapper {
 
-    User getUserByID(@Param("uid") int id);
+    User getUCByID(@Param("uid") int id);
 
     User checkLogin(@Param("uid") int id,String pwd);
     
@@ -25,5 +25,7 @@ public interface UserMapper {
     int alterPassword(@Param("uid") int uid,String pwd);
 
     int setImg(@Param("uid") int uid,String img);
+
+    User getUser(@Param("uid") int uid);
 
 }

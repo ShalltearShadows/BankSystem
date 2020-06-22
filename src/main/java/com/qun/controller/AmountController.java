@@ -14,6 +14,7 @@ import com.qun.pojo.Card;
 import com.qun.pojo.Log;
 import com.qun.pojo.User;
 import com.qun.service.LogService;
+import com.qun.utils.MathUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,7 +39,7 @@ public class AmountController {
     public String amount(Model model, HttpSession session){
 
         int uid = (int)session.getAttribute("uid");
-        User user = userMapper.getUserByID(uid);
+        User user = userMapper.getUCByID(uid);
         model.addAttribute("cards",user.getCards());
 
         return "user/amount/amount";
@@ -71,7 +72,7 @@ public class AmountController {
         int uid = (int) session.getAttribute("uid");
 
         Log log = LogService.depositLog(uid, cid, amount);
-        logMapper.addLog(log);
+        logMapper.depositLog(log);
 
         if (res!=1){
             model.addAttribute("存款失败","msg");
@@ -100,12 +101,14 @@ public class AmountController {
 
         double flag = card.getAmount();
         int res=0;
-        if (flag>=amount){
+        if (MathUtil.compare(flag,amount)>0){
             card.setAmount(flag-amount);
             res=cardMapper.updateCard(card);
             int uid = (int) session.getAttribute("uid");
             Log log = LogService.withdrawLog(uid, cid, amount);
-            logMapper.addLog(log);
+            logMapper.withdrawLog(log);
+        }else {
+            model.addAttribute("msg","余额不足");
         }
 
         if (res!=1){
@@ -120,7 +123,7 @@ public class AmountController {
     public String transfer(Model model,HttpSession session){
 
         int uid = (int)session.getAttribute("uid");
-        User user = userMapper.getUserByID(uid);
+        User user = userMapper.getUCByID(uid);
         model.addAttribute("cards",user.getCards());
 
 
@@ -135,23 +138,37 @@ public class AmountController {
         Card card2 = cardMapper.getCard(cid2);
         double flag = card1.getAmount();
         int res=0;
-        if (flag>=amount){
+        if (cid1==cid2){
+            model.addAttribute("msg","同一张卡不能转账");
+        }else if (MathUtil.compare(flag,amount)<0){
+            model.addAttribute("msg","余额不足");
+        }else {
+            //更新转出卡
             card1.setAmount(flag-amount);
             res=cardMapper.updateCard(card1);
+
+            //更新转入卡
             double am = card2.getAmount();
             card2.setAmount(am+amount);
+            if (res==1){
+                res=cardMapper.updateCard(card2);
+            }
 
-            int uid = (int) session.getAttribute("uid");
-            Log log = LogService.tansferLog(uid, cid1, cid2, amount);
-            logMapper.addLog(log);
+            //添加Card1日志
+            Log log = LogService.tansferLog(card1.getUid(), cid1, cid2, amount);
+            logMapper.transferLog(log);
+            //若两张卡的卡主不同，添加Card2日志
+            if (card1.getCid()==card2.getUid()){
+                log.setUid(card2.getUid());
+                logMapper.transferLog(log);
+            }
         }
 
         if (res!=1){
-            model.addAttribute("转账失败","msg");
-            return "user/amount/withdraw";
+            model.addAttribute("msg","转账失败");
         }
 
-        return "redirect:/amount/display";
+        return "user/amount/display";
     }
 
 }

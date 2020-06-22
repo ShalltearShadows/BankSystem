@@ -11,10 +11,17 @@ import lombok.Data;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.text.DecimalFormat;
 
 @Data
 public class Card implements Serializable {
     private long cid;
+    private int uid;
     private double amount;
     private Timestamp date;
+    private DecimalFormat df = new DecimalFormat("#.00");
+
+    public void setAmount(double amount) {
+        this.amount = Double.parseDouble(df.format(amount));
+    }
 }

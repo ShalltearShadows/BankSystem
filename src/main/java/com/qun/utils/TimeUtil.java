@@ -16,7 +16,7 @@ public class TimeUtil {
     public static Timestamp stringToStamp(String date){
         //如果没输入日期，做处理
         if (StringUtils.isEmpty(date)){
-            date="0-0-0";
+            date="1970-01-1";
         }
         Timestamp time = Timestamp.valueOf(date+" 0:0:0");
         return time;

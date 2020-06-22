@@ -25,7 +25,7 @@ public class UserController {
     @GetMapping("/person")
     public String person(Model model, HttpSession session){
         int uid = (int) session.getAttribute("uid");
-        User user=userMapper.getUserByID(uid);
+        User user=userMapper.getUser(uid);
         model.addAttribute("user",user);
         return "user/person";
     }
@@ -33,7 +33,7 @@ public class UserController {
 
     @GetMapping("/alter/{id}")
     public String alter(@PathVariable("id") Integer id,Model model){
-        User user = userMapper.getUserByID(id);
+        User user = userMapper.getUser(id);
         model.addAttribute("user",user);
 
         return "user/alter";
@@ -64,14 +64,7 @@ public class UserController {
 
 
     @GetMapping("/head")
-    public String img(Model model,HttpSession session){
-
-        int uid = (int) session.getAttribute("uid");
-
-        User user = userMapper.getUserByID(uid);
-
-        model.addAttribute("user",user);
-
+    public String img(){
         return "user/upload";
     }
 

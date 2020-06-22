@@ -5,7 +5,7 @@
 <mapper namespace="com.qun.mapper.UserMapper">
 
     <!-- 复杂对象的查询 -->
-    <select id="getUserByID" resultMap="UserWithCards">
+    <select id="getUCByID" resultMap="UserWithCards">
         select u.uid uid,uname,card_counts counts,gender,phone,cid,amount,date
             from user u,card c
             where u.uid=#{uid} and c.uid=#{uid}
@@ -26,6 +26,10 @@
             <result property="date" column="date"/>
         </collection>
     </resultMap>
+
+    <select id="getUser" resultType="User">
+        select * from user where uid=#{uid}
+    </select>
 
 
     <select id="checkLogin" resultType="User">

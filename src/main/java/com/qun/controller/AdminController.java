@@ -108,6 +108,7 @@ public class AdminController {
 
         User user = new User();
 
+        user.setGender(3);
         model.addAttribute("user",user);
 
         return "admin/alteruser";
@@ -117,7 +118,7 @@ public class AdminController {
     public String alterUser(@PathVariable("uid") Integer uid,Model model){
 
         if (uid!=null){
-            User user = userMapper.getUserByID(uid);
+            User user = userMapper.getUser(uid);
             model.addAttribute("user",user);
         }
 
@@ -154,14 +155,7 @@ public class AdminController {
 
 
     @GetMapping("/head")
-    public String img(Model model,HttpSession session){
-
-        int uid = (int) session.getAttribute("uid");
-
-        User user = userMapper.getUserByID(uid);
-
-        model.addAttribute("user",user);
-
+    public String img(HttpSession session){
         return "admin/upload";
     }
 

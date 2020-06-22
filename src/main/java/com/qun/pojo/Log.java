@@ -16,8 +16,8 @@ import java.sql.Timestamp;
 public class Log implements Serializable {
     private long lid;
     private int uid;
-    private long cid1;
-    private long cid2;
+    private Long cid1;
+    private Long cid2;
     private double amount;
     private String operation;
     private Timestamp date;

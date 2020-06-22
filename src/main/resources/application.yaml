@@ -3,7 +3,7 @@ spring:
   thymeleaf:
     cache: false #关闭thymeleaf缓存
   messages:
-    basename: i18n.login
+    basename: i18n/login
   mvc:
     date-format: yyyy-MM-dd #时间格式化
   datasource:

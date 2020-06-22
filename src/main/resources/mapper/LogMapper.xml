@@ -12,9 +12,19 @@
         select * from log where cid1 = #{cid} or cid2 =#{cid}
     </select>
 
-    <insert id="addLog">
+    <insert id="transferLog">
         insert into log (uid,cid1,cid2,amount,operation,date)
         values (#{uid},#{cid1},#{cid2},#{amount},#{operation},#{date})
+    </insert>
+
+    <insert id="depositLog">
+        insert into log (uid,cid1,amount,operation,date)
+        values (#{uid},#{cid1},#{amount},#{operation},#{date})
+    </insert>
+
+    <insert id="withdrawLog">
+        insert into log (uid,cid2,amount,operation,date)
+        values (#{uid},#{cid2},#{amount},#{operation},#{date})
     </insert>
 
 </mapper>
