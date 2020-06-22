@@ -14,6 +14,7 @@
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
             <form th:action="@{/amount/withdraw}" method="post">
+
                 <div class="form-group">
                     <label>银行卡号</label>
                     <input type="text" name="cid" class="form-control" th:value="${cid}">
@@ -26,6 +27,7 @@
 
                 <button type="submit" class="btn btn-primary">确定</button>
             </form>
+
         </main>
     </div>
 </div>

@@ -49,6 +49,12 @@ public class AdminController {
         int flag=adminMapper.alterAdmin(admin);
         session.setAttribute("name",admin.getAname());
 
+        if (flag==1){
+            model.addAttribute("smsg","修改成功");
+        }else {
+            model.addAttribute("msg","修改失败");
+        }
+
         return "admin/person";
     }
 
@@ -129,7 +135,7 @@ public class AdminController {
     public String alteruser(User user,Model model){
         int flag = userMapper.alterUser(user);
         if (flag==1){
-            model.addAttribute("msg","修改成功");
+            model.addAttribute("smsg","修改成功");
         }else {
             model.addAttribute("msg","修改失败");
         }
@@ -150,6 +156,12 @@ public class AdminController {
 
         int flag = adminMapper.alterPassword(aid,password);
 
+        if (flag==1){
+            model.addAttribute("smsg","修改成功");
+        }else {
+            model.addAttribute("msg","修改失败");
+        }
+
         return "admin/password";
     }
 
@@ -161,18 +173,14 @@ public class AdminController {
 
 
     @RequestMapping("/upload")
-    public String one(MultipartFile file, RedirectAttributes redirectAttributes, Model model,
-                      HttpServletRequest request,HttpSession session) throws IOException {
+    public String one(MultipartFile file,Model model,HttpSession session) throws IOException {
         if(file.isEmpty()){
-            redirectAttributes.addFlashAttribute("msg","不能上传空文件！！！");
+            model.addAttribute("msg","不能上传空文件！！！");
             return "upload";
         }
 
-        redirectAttributes.addFlashAttribute("name",file.getOriginalFilename());
-
         //获取target/class里的文件
         String realPath = User.class.getClassLoader().getResource("./static/upload/").getPath();
-
 
         String name = file.getOriginalFilename();
         String suffix = name.substring(name.lastIndexOf(".") + 1);
@@ -188,7 +196,6 @@ public class AdminController {
         session.setAttribute("img",img);
 
         return "admin/upload";
-
     }
 
 }

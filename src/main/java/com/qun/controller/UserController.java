@@ -43,7 +43,11 @@ public class UserController {
     public String alter(User user,Model model,HttpSession session){
         int flag=userMapper.alterUser(user);
         session.setAttribute("name",user.getUname());
-
+        if (flag==1){
+            model.addAttribute("smsg","修改成功");
+        }else {
+            model.addAttribute("msg","修改失败");
+        }
         return "user/person";
     }
 
@@ -59,6 +63,12 @@ public class UserController {
 
         int flag = userMapper.alterPassword(uid,password);
 
+        if (flag==1){
+            model.addAttribute("smsg","修改成功");
+        }else {
+            model.addAttribute("msg","修改失败");
+        }
+
         return "user/password";
     }
 
@@ -69,15 +79,12 @@ public class UserController {
     }
 
 
-    @RequestMapping("/upload")
-    public String one(MultipartFile file, RedirectAttributes redirectAttributes, Model model,
-                      HttpServletRequest request,HttpSession session) throws IOException {
+    @PostMapping("/upload")
+    public String one(MultipartFile file,Model model, HttpSession session) throws IOException {
         if(file.isEmpty()){
-            redirectAttributes.addFlashAttribute("msg","不能上传空文件！！！");
+            model.addAttribute("msg","不能上传空文件！！！");
             return "upload";
         }
-
-        redirectAttributes.addFlashAttribute("name",file.getOriginalFilename());
 
         //获取target/class里的文件
         String realPath = User.class.getClassLoader().getResource("./static/upload/").getPath();

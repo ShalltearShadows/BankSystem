@@ -80,7 +80,12 @@ public class LogController {
 
         logs = LogService.selectLogs(list,date1,date2);
 
+        if (logs.size()==0){
+            model.addAttribute("msg","查无记录！");
+        }
+
         model.addAttribute("logs",logs);
+
 
         return "user/log/query";
     }
@@ -99,6 +104,10 @@ public class LogController {
         list = logMapper.queryAll(uid);
 
         logs = LogService.selectLogs(list,date1,date2);
+
+        if (logs.size()==0){
+            model.addAttribute("msg","查无记录！");
+        }
 
         model.addAttribute("logs",logs);
 

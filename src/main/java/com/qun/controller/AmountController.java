@@ -19,7 +19,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.thymeleaf.util.StringUtils;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @Controller
@@ -59,7 +62,7 @@ public class AmountController {
     }
 
     @PostMapping("/deposit")
-    public String deposit(@RequestParam("cid") Long cid,@RequestParam("amount") double amount,Model model,HttpSession session){
+    public String deposit(@RequestParam("cid") Long cid,@RequestParam("amount") double amount,Model model){
 
         Card card = cardMapper.getCard(cid);
 
@@ -69,17 +72,20 @@ public class AmountController {
 
         int res = cardMapper.updateCard(card);
 
-        int uid = (int) session.getAttribute("uid");
-
-        Log log = LogService.depositLog(uid, cid, amount);
+        Log log = LogService.depositLog(card.getUid(), cid, amount);
         logMapper.depositLog(log);
 
         if (res!=1){
             model.addAttribute("存款失败","msg");
             return "user/amount/deposit";
+        }else {
+            model.addAttribute("smsg","存款成功");
         }
 
-        return "redirect:/amount/display";
+        User user = userMapper.getUCByID(card.getUid());
+        model.addAttribute("cards",user.getCards());
+
+        return "user/amount/amount";
     }
 
     @GetMapping("/withdraw")
@@ -96,7 +102,7 @@ public class AmountController {
     }
 
     @PostMapping("/withdraw")
-    public String withdraw(@RequestParam("cid") Long cid,@RequestParam("amount") double amount,Model model,HttpSession session){
+    public String withdraw(@RequestParam("cid") Long cid, @RequestParam("amount") double amount, Model model){
         Card card = cardMapper.getCard(cid);
 
         double flag = card.getAmount();
@@ -104,19 +110,18 @@ public class AmountController {
         if (MathUtil.compare(flag,amount)>0){
             card.setAmount(flag-amount);
             res=cardMapper.updateCard(card);
-            int uid = (int) session.getAttribute("uid");
-            Log log = LogService.withdrawLog(uid, cid, amount);
+
+            Log log = LogService.withdrawLog(card.getUid(), cid, amount);
             logMapper.withdrawLog(log);
+            model.addAttribute("smsg","取款成功");
         }else {
             model.addAttribute("msg","余额不足");
         }
 
-        if (res!=1){
-            model.addAttribute("取款失败","msg");
-            return "user/amount/withdraw";
-        }
+        User user = userMapper.getUCByID(card.getUid());
+        model.addAttribute("cards",user.getCards());
 
-        return "redirect:/amount/display";
+        return "user/amount/amount";
     }
 
     @GetMapping("/transfer")
@@ -162,11 +167,16 @@ public class AmountController {
                 log.setUid(card2.getUid());
                 logMapper.transferLog(log);
             }
+
+            model.addAttribute("smsg","转账成功");
         }
 
         if (res!=1){
             model.addAttribute("msg","转账失败");
         }
+
+        User user = userMapper.getUCByID(card1.getUid());
+        model.addAttribute("cards",user.getCards());
 
         return "user/amount/display";
     }

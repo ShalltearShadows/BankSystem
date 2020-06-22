@@ -38,16 +38,27 @@ public class CardController {
     }
 
     @PostMapping("/add")
-    public String add(@RequestParam("pwd") String pwd, HttpSession session){
-        //TODO 验证密码
+    public String add(@RequestParam("pwd") String pwd,Model model, HttpSession session){
 
         int uid = (int) session.getAttribute("uid");
 
-        //TODO 检查卡数
+        User user = userMapper.getUCByID(uid);
+        if (!pwd.equals(user.getUpwd())){
+            model.addAttribute("msg","密码错误");
+            return "user/card/add";
+        }
 
+        if (user.getCards().size()>=5){
+            model.addAttribute("msg","您已持有5张银行卡，不能再申请银行卡了！");
+            return "user/card/add";
+        }
+
+        model.addAttribute("smsg","申请成功");
         cardMapper.addCard(uid);
 
-        return "redirect:/amount/display";
+        model.addAttribute("cards",user.getCards());
+
+        return "user/amount/amount";
     }
 
 
@@ -64,17 +75,34 @@ public class CardController {
     }
 
     @PostMapping("/delete")
-    public String delete(@RequestParam("pwd") String pwd, @RequestParam("cid") long cid){
-        //TODO 验证密码
+    public String delete(@RequestParam("pwd") String pwd, @RequestParam("cid") long cid,
+                         Model model,HttpSession session){
 
-        //TODO 验证卡号
+        int uid = (int) session.getAttribute("uid");
+
+        User user = userMapper.getUCByID(uid);
+
+        if (!pwd.equals(user.getUpwd())){
+            model.addAttribute("msg","密码错误");
+            return "user/card/delete";
+        }
+
+        if (user.getCards().size()<=0){
+            model.addAttribute("msg","您的银行卡数量为0，不能再删除银行卡了！");
+            return "user/card/delete";
+        }
+
+        model.addAttribute("smsg","删除成功");
+
         int flag = cardMapper.deleteCard(cid);
 
         if (flag==1){
-
+            model.addAttribute("msg","服务器错误，删除失败");
+            return "user/card/delete";
         }
 
-        return "redirect:/amount/display";
-    }
+        model.addAttribute("cards",user.getCards());
 
+        return "user/amount/amount";
+    }
 }
