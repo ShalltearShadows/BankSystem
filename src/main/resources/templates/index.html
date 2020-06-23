@@ -15,6 +15,7 @@
 </head>
 
 <body class="text-center">
+	<div th:replace="~{commons/headdoc.html::headdoc}"></div>
 
 	<div class="frame">
 		<form class="form-signin" th:action="@{/user/login}" method="post">
@@ -37,8 +38,13 @@
 			<a class="btn btn-sm" th:href="@{/index(lang='zh_CN')}">中文</a>
 			<a class="btn btn-sm" th:href="@{/index(lang='en_US')}">English</a>
 		</form>
+		<div>
+			<button style="display: none" id="alert_demo_3_2"> Error</button>
+			<button style="display: none" id="alert_demo_3_3"> Success</button>
+		</div>
 	</div>
 
+	<div th:replace="~{commons/jsdoc.html::jsdoc}"></div>
 	<script id="vs" type="x-shader/x-vertex">
 		varying vec2 vUv; void main() { vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 ); }
 	</script>

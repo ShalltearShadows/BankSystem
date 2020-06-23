@@ -68,7 +68,6 @@ public class LoginController {
             model.addAttribute("msg","用户名或密码错误");
             return "admin";
         }
-
     }
 
     @GetMapping("/user/register")
@@ -87,7 +86,6 @@ public class LoginController {
         session.setAttribute("permission","User");
 
         return "redirect:/home";
-
     }
 
 }

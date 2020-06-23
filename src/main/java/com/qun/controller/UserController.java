@@ -115,4 +115,31 @@ public class UserController {
 
     }
 
+    @GetMapping("/user/delete")
+    public String delete(){
+        return "user/delete";
+    }
+
+    @PostMapping("/user/delete")
+    public String delete(String pwd1,String pwd2,Model model,HttpSession session){
+
+        int uid = (int) session.getAttribute("uid");
+        User user = userMapper.getUCByID(uid);
+
+        if (!user.getUpwd().equals(pwd1)){
+            model.addAttribute("msg","密码不正确");
+            return "user/delete";
+        }else if (!pwd1.equals(pwd2)){
+            model.addAttribute("msg","两次输入的密码不一致");
+            return "user/delete";
+        }else if (user.getCards()!=null||user.getCards().size()>0){
+            model.addAttribute("msg","您还有未注销的银行卡");
+            return "user/delete";
+        }else {
+            userMapper.deleteUser(uid);
+            model.addAttribute("smsg","注销成功");
+            session.invalidate();
+            return "redirect:/main";
+        }
+    }
 }
