@@ -88,4 +88,23 @@ public class LoginController {
         return "redirect:/home";
     }
 
+    @GetMapping("/admin/adduser")
+    public String adduser(){
+        return "admin/adduser";
+    }
+
+
+    @PostMapping("/admin/adduser")
+    public String adduser(User user,Model model){
+        int flag = userMapper.addUser(user);
+
+        if (flag==1){
+            model.addAttribute("smsg","添加成功");
+        }else {
+            model.addAttribute("msg","添加失败");
+        }
+
+        return "admin/adduser";
+    }
+
 }

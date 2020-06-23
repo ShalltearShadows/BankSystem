@@ -119,6 +119,11 @@
                                         <span class="sub-item">修改用户信息</span>
                                     </a>
                                 </li>
+                                <li th:class="${second=='add'?'active':''}">
+                                    <a th:href="@{/admin/adduser}">
+                                        <span class="sub-item">添加用户</span>
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                     </li>
