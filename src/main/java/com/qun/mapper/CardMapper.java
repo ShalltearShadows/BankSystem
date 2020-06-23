@@ -12,11 +12,13 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import java.sql.Timestamp;
+
 @Mapper
 @Repository
 public interface CardMapper {
-    Card getCard(@Param("cid") long cid);
-    int deleteCard(@Param("cid") long cid);
+    Card getCard(@Param("cid") Long cid);
+    int deleteCard(@Param("cid") Long cid);
     int updateCard(Card card);
-    int addCard(int uid);
+    int addCard(int uid, Timestamp date);
 }

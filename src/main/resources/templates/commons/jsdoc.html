@@ -297,15 +297,17 @@
                 $("#alert_demo_3_2").click();
             }
         }
+
         function susinfo(smsg) {
-            if (msg!=null){
+            if (smsg!=null){
                 $("#alert_demo_3_3").click();
             }
         }
 
 
         $(function () {
-            info([[${smsg}]])
+            errinfo([[${msg}]]);
+            susinfo([[${smsg}]]);
         })
     </script>
 </nav>

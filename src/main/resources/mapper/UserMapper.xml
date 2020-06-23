@@ -6,7 +6,7 @@
 
     <!-- 复杂对象的查询 -->
     <select id="getUCByID" resultMap="UserWithCards">
-        select u.uid uid,uname,card_counts counts,gender,phone,cid,amount,date
+        select u.uid uid,uname,upwd, card_counts cardCounts,gender,phone,cid,amount,date
             from user u,card c
             where u.uid=#{uid} and c.uid=#{uid}
     </select>
@@ -36,8 +36,8 @@
         select * from user where uid = #{uid} and upwd = #{pwd}
     </select>
 
-    <insert id="addUser" parameterType="User">
-        insert into user (uid,uname,upwd,phone) values (#{uid},#{uname},#{upwd},#{phone})
+    <insert id="addUser" parameterType="User" useGeneratedKeys="true" keyProperty="uid">
+        insert into user (uname,upwd,gender,phone) values (#{uname},#{upwd},#{gender},#{phone})
     </insert>
 
     <update id="alterUser" parameterType="User">
@@ -56,5 +56,8 @@
         update user set img = #{img} where uid = #{uid}
     </update>
 
+    <update id="alterCounts">
+        update user set card_counts = #{counts} where uid = #{uid}
+    </update>
 
 </mapper>

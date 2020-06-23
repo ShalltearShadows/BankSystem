@@ -171,14 +171,10 @@ public class AmountController {
             model.addAttribute("smsg","转账成功");
         }
 
-        if (res!=1){
-            model.addAttribute("msg","转账失败");
-        }
-
         User user = userMapper.getUCByID(card1.getUid());
         model.addAttribute("cards",user.getCards());
 
-        return "user/amount/display";
+        return "user/amount/amount";
     }
 
 }

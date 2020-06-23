@@ -28,4 +28,5 @@ public interface UserMapper {
 
     User getUser(@Param("uid") int uid);
 
+    int alterCounts(int counts,int uid);
 }

@@ -2,6 +2,7 @@ package com.qun.controller;
 
 import com.qun.mapper.UserMapper;
 import com.qun.pojo.User;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,14 +14,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.Logger;
 
-
+@Slf4j
 @Controller
 @RequestMapping("/user")
 public class UserController {
 
     @Autowired
     private UserMapper userMapper;
+
+    private static Logger logger = Logger.getLogger("log");
+
 
     @GetMapping("/person")
     public String person(Model model, HttpSession session){
@@ -57,16 +62,20 @@ public class UserController {
     }
 
     @PostMapping("/password")
-    public String password(@RequestParam("new") String password,Model model,HttpSession session){
+    public String password(@RequestParam("old") String old,@RequestParam("new") String password,
+                           @RequestParam("new2") String new2, Model model,HttpSession session){
 
         int uid = (int) session.getAttribute("uid");
 
-        int flag = userMapper.alterPassword(uid,password);
+        User user = userMapper.getUser(uid);
 
-        if (flag==1){
-            model.addAttribute("smsg","修改成功");
+        if (!user.getUpwd().equals(old)){
+            model.addAttribute("msg","旧密码错误");
+        }else if (!password.equals(new2)){
+            model.addAttribute("msg","密码不一致");
         }else {
-            model.addAttribute("msg","修改失败");
+            userMapper.alterPassword(uid,password);
+            model.addAttribute("smsg","修改成功");
         }
 
         return "user/password";
@@ -83,7 +92,7 @@ public class UserController {
     public String one(MultipartFile file,Model model, HttpSession session) throws IOException {
         if(file.isEmpty()){
             model.addAttribute("msg","不能上传空文件！！！");
-            return "upload";
+            return "user/upload";
         }
 
         //获取target/class里的文件

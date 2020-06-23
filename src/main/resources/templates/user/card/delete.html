@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Dashboard Template for Bootstrap</title>
+    <title>删除银行卡</title>
     <div th:replace="~{commons/headdoc.html::headdoc}"></div>
 </head>
 <body>
@@ -16,12 +16,16 @@
             <form th:action="@{/card/delete}" method="post">
                 <div class="form-group" >
                     <label>请选择卡号</label>
-                    <select class="form-control" name="cid1">
+                    <select class="form-control" name="cid">
                         <option th:each="card:${cards}"
                                 th:text="${card.getCid()}"
                                 th:value="${card.getCid()}">
                         </option>
                     </select>
+                </div>
+                <div class="form-group">
+                    <label>请输入密码</label>
+                    <input type="password" required class="form-control" name="pwd">
                 </div>
 
                 <button type="submit" class="btn btn-primary">确定</button>

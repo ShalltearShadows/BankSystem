@@ -71,4 +71,23 @@ public class LoginController {
 
     }
 
+    @GetMapping("/user/register")
+    public String register(){
+        return "register";
+    }
+
+    @PostMapping("/user/register")
+    public String register(User user,HttpSession session){
+
+        userMapper.addUser(user);
+
+        session.setAttribute("uid",user.getUid());
+        session.setAttribute("name",user.getUname());
+        session.setAttribute("img","0.jpg");
+        session.setAttribute("permission","User");
+
+        return "redirect:/home";
+
+    }
+
 }

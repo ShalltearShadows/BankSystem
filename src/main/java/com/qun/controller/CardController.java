@@ -11,6 +11,7 @@ import com.qun.mapper.CardMapper;
 import com.qun.mapper.UserMapper;
 import com.qun.pojo.Card;
 import com.qun.pojo.User;
+import com.qun.utils.TimeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
+import java.sql.Timestamp;
+import java.util.logging.Logger;
 
 @Controller
 @RequestMapping("/card")
@@ -30,6 +33,8 @@ public class CardController {
 
     @Autowired
     private CardMapper cardMapper;
+
+    private static Logger logger = Logger.getLogger("log");
 
 
     @GetMapping("/add")
@@ -43,21 +48,27 @@ public class CardController {
         int uid = (int) session.getAttribute("uid");
 
         User user = userMapper.getUCByID(uid);
-        if (!pwd.equals(user.getUpwd())){
-            model.addAttribute("msg","密码错误");
-            return "user/card/add";
+
+        try {
+
+            if (!pwd.equals(user.getUpwd())) {
+                model.addAttribute("msg", "密码错误");
+                return "user/card/add";
+            } else if (user.getCards().size() >= 5) {
+                model.addAttribute("msg", "您已持有5张银行卡，不能再申请银行卡了！");
+                return "user/card/add";
+            }
+
+            model.addAttribute("smsg", "申请成功");
+            cardMapper.addCard(uid, new Timestamp(System.currentTimeMillis()));
+
+            User usercard = userMapper.getUCByID(uid);
+            userMapper.alterCounts(usercard.getCardCounts(),uid);
+
+            model.addAttribute("cards", usercard.getCards());
+        }catch (NullPointerException e){
+            logger.warning(e.getMessage());
         }
-
-        if (user.getCards().size()>=5){
-            model.addAttribute("msg","您已持有5张银行卡，不能再申请银行卡了！");
-            return "user/card/add";
-        }
-
-        model.addAttribute("smsg","申请成功");
-        cardMapper.addCard(uid);
-
-        model.addAttribute("cards",user.getCards());
-
         return "user/amount/amount";
     }
 
@@ -67,7 +78,7 @@ public class CardController {
 
         int uid = (int) session.getAttribute("uid");
 
-        User user = userMapper.getUser(uid);
+        User user = userMapper.getUCByID(uid);
 
         model.addAttribute("cards",user.getCards());
 
@@ -75,12 +86,14 @@ public class CardController {
     }
 
     @PostMapping("/delete")
-    public String delete(@RequestParam("pwd") String pwd, @RequestParam("cid") long cid,
+    public String delete(@RequestParam("pwd") String pwd, @RequestParam("cid") Long cid,
                          Model model,HttpSession session){
 
         int uid = (int) session.getAttribute("uid");
 
         User user = userMapper.getUCByID(uid);
+
+
 
         if (!pwd.equals(user.getUpwd())){
             model.addAttribute("msg","密码错误");
@@ -92,16 +105,13 @@ public class CardController {
             return "user/card/delete";
         }
 
+        cardMapper.deleteCard(cid);
         model.addAttribute("smsg","删除成功");
 
-        int flag = cardMapper.deleteCard(cid);
+        User usercard = userMapper.getUCByID(uid);
+        userMapper.alterCounts(usercard.getCardCounts(),uid);
 
-        if (flag==1){
-            model.addAttribute("msg","服务器错误，删除失败");
-            return "user/card/delete";
-        }
-
-        model.addAttribute("cards",user.getCards());
+        model.addAttribute("cards",usercard.getCards());
 
         return "user/amount/amount";
     }

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Dashboard Template for Bootstrap</title>
+    <title>申请银行卡</title>
     <div th:replace="~{commons/headdoc.html::headdoc}"></div>
 </head>
 <body>
@@ -16,12 +16,12 @@
             <form th:action="@{/card/add}" method="post">
                 <div class="form-group">
                     <label>请输入密码</label>
-                    <input type="text" class="form-control" name="pwd">
+                    <input type="password" class="form-control" name="pwd">
                 </div>
 
                 <div class="form-group">
                     <label>请重新输入密码</label>
-                    <input type="text" class="form-control" name="pwd2">
+                    <input type="password" class="form-control" name="pwd2">
                 </div>
 
                 <button type="submit" class="btn btn-primary">确定</button>

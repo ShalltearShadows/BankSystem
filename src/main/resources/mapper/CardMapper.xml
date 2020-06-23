@@ -9,7 +9,7 @@
         where cid = #{cid}
     </select>
 
-    <delete id="deleteCard" parameterType="int">
+    <delete id="deleteCard">
         delete from card where cid = #{cid}
     </delete>
 
@@ -18,6 +18,6 @@
     </update>
 
     <insert id="addCard">
-        insert into card (uid) values (#{uid})
+        insert into card (uid,date) values (#{uid},#{date})
     </insert>
 </mapper>

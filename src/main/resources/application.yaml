@@ -46,3 +46,10 @@ mybatis:
   #设置启用数据库字段下划线映射到java对象的驼峰式命名属性，默认为false
   configuration:
     map-underscore-to-camel-case: true
+
+    log-impl=org:
+      apache:
+        ibatis:
+          logging:
+            log4j2:
+              Log4j2Impl:
