@@ -93,15 +93,17 @@ public class CardController {
 
         User user = userMapper.getUCByID(uid);
 
+        Card card = cardMapper.getCard(cid);
 
 
         if (!pwd.equals(user.getUpwd())){
             model.addAttribute("msg","密码错误");
             return "user/card/delete";
-        }
-
-        if (user.getCards().size()<=0){
+        }else if (user.getCards().size()<=0){
             model.addAttribute("msg","您的银行卡数量为0，不能再删除银行卡了！");
+            return "user/card/delete";
+        }else if (card.getAmount()>0){
+            model.addAttribute("msg","您的银行卡余额大于0，请先转出全部金额");
             return "user/card/delete";
         }
 

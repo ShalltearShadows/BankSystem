@@ -109,6 +109,11 @@ public class AdminController {
         return "admin/list";
     }
 
+    /**
+     * 去修改用户信息页面
+     * @param model
+     * @return
+     */
     @GetMapping("/alteruserinfo")
     public String alterUserInfo(Model model){
 
@@ -131,10 +136,19 @@ public class AdminController {
         return "admin/alteruser";
     }
 
+    /**
+     * 修改用户信息
+     * @param user
+     * @param model
+     * @return
+     */
     @PostMapping("/alteruser")
     public String alteruser(User user,Model model){
+        User u = userMapper.getUser(user.getUid());
         int flag = userMapper.alterUser(user);
-        if (flag==1){
+        if (u==null){
+            model.addAttribute("msg","账号不存在");
+        }else if (flag==1){
             model.addAttribute("smsg","修改成功");
         }else {
             model.addAttribute("msg","修改失败");
@@ -150,16 +164,20 @@ public class AdminController {
     }
 
     @PostMapping("/password")
-    public String password(@RequestParam("new") String password,Model model,HttpSession session){
+    public String password(@RequestParam("old") String old,@RequestParam("new") String password,
+                           @RequestParam("new2") String new2, Model model,HttpSession session){
 
         int aid = (int) session.getAttribute("uid");
 
-        int flag = adminMapper.alterPassword(aid,password);
+        Admin admin = adminMapper.getAdminByID(aid);
 
-        if (flag==1){
-            model.addAttribute("smsg","修改成功");
+        if (!admin.getApwd().equals(old)){
+            model.addAttribute("msg","旧密码错误");
+        }else if (!password.equals(new2)){
+            model.addAttribute("msg","密码不一致");
         }else {
-            model.addAttribute("msg","修改失败");
+            adminMapper.alterPassword(aid,password);
+            model.addAttribute("smsg","修改成功");
         }
 
         return "admin/password";
