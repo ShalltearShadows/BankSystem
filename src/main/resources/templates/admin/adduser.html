@@ -16,13 +16,13 @@
         <div th:replace="~{commons/adminsidebar.html::adminsidebar(first='user',second='add')}"></div>
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-            <form href="/admin/adduser" method="post">
+            <form href="/admin/adduser" style="margin-top: -61px;" method="post">
                 <div class="row" style="width: 777px;margin: auto;margin-top: 77px;">
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
                                 <div class="card-title">用户注册</div>
-                                <div class="card-category">请输入待添加用户的信息，包括姓名、性别、电话和密码<a class="link" href="https://bootstrap-notify.remabledesigns.com/">Bootstrap Notify</a></div>
+                                <div class="card-category">请输入待添加用户的信息，包括姓名、性别、电话和密码</div>
                             </div>
                             <div class="card-body">
                                 <div class="form">
@@ -68,7 +68,7 @@
 
                                         </div>
                                         <div class="col-lg-4 col-md-9 col-sm-12">
-                                            <button id="displayNotif" class="btn btn-success">提交</button>
+                                            <button class="btn btn-success">提交</button>
                                         </div>
                                     </div>
                                 </div>
@@ -77,6 +77,10 @@
                     </div>
                 </div>
             </form>
+            <div>
+                <button style="display: none" id="alert_demo_3_2"> Error</button>
+                <button style="display: none" id="alert_demo_3_3"> Success</button>
+            </div>
         </main>
     </div>
 </div>

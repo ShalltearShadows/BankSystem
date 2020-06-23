@@ -216,4 +216,20 @@ public class AdminController {
         return "admin/upload";
     }
 
+    @PostMapping("/register")
+    public String register(Admin admin,@RequestParam("sex") String sex,HttpSession session){
+
+        if (sex.indexOf("男")!=-1){
+            admin.setGender(1);
+        }else {
+            admin.setGender(0);
+        }
+        adminMapper.addAdmin(admin);
+        session.setAttribute("uid",admin.getAid());
+        session.setAttribute("name",admin.getAname());
+        session.setAttribute("img","0.jpg");
+        session.setAttribute("permission","Administrator");
+        return "admin/home";
+    }
+
 }

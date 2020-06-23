@@ -24,7 +24,7 @@
         select * from user where uid like concat('%',#{uid},'%')
     </select>
 
-    <insert id="addAdmin" parameterType="Admin">
+    <insert id="addAdmin" parameterType="Admin" useGeneratedKeys="true" keyProperty="aid">
         insert into admin (aname,apwd,phone,gender) values (#{aname},#{apwd},#{phone},#{gender})
     </insert>
 
