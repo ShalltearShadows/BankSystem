@@ -11,7 +11,7 @@ import com.qun.mapper.CardMapper;
 import com.qun.mapper.UserMapper;
 import com.qun.pojo.Card;
 import com.qun.pojo.User;
-import com.qun.utils.TimeUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +24,7 @@ import javax.servlet.http.HttpSession;
 import java.sql.Timestamp;
 import java.util.logging.Logger;
 
+@Slf4j
 @Controller
 @RequestMapping("/card")
 public class CardController {
@@ -33,9 +34,6 @@ public class CardController {
 
     @Autowired
     private CardMapper cardMapper;
-
-    private static Logger logger = Logger.getLogger("log");
-
 
     @GetMapping("/add")
     public String add(){
@@ -67,7 +65,7 @@ public class CardController {
 
             model.addAttribute("cards", usercard.getCards());
         }catch (NullPointerException e){
-            logger.warning(e.getMessage());
+            log.error(e.getMessage());
         }
         return "user/amount/amount";
     }

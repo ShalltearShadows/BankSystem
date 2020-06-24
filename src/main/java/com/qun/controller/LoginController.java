@@ -4,7 +4,6 @@ import com.qun.mapper.AdminMapper;
 import com.qun.mapper.UserMapper;
 import com.qun.pojo.Admin;
 import com.qun.pojo.User;
-import com.qun.utils.SpringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

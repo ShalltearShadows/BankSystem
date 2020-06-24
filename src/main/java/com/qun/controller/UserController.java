@@ -24,9 +24,6 @@ public class UserController {
     @Autowired
     private UserMapper userMapper;
 
-    private static Logger logger = Logger.getLogger("log");
-
-
     @GetMapping("/person")
     public String person(Model model, HttpSession session){
         int uid = (int) session.getAttribute("uid");
@@ -126,8 +123,6 @@ public class UserController {
 
         int uid = (int) session.getAttribute("uid");
         User user = userMapper.getUser(uid);
-
-        logger.warning(user.toString()+pwd1+"++"+pwd2);
 
         if (!user.getUpwd().equals(pwd1)){
             model.addAttribute("msg","密码不正确");

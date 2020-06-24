@@ -1,0 +1,48 @@
+2020-06-24 17:18:38.703 [main] INFO  com.qun.BankSystemApplication - Starting BankSystemApplication on PC201908261901 with PID 8536 (D:\Java\BankSystem\target\classes started by Administrator in D:\Java\BankSystem)
+2020-06-24 17:18:38.715 [main] INFO  com.qun.BankSystemApplication - No active profile set, falling back to default profiles: default
+2020-06-24 17:18:39.922 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2020-06-24 17:18:39.923 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2020-06-24 17:18:39.924 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.36]
+2020-06-24 17:18:40.036 [main] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2020-06-24 17:18:41.251 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2020-06-24 17:18:41.284 [main] INFO  com.qun.BankSystemApplication - Started BankSystemApplication in 3.145 seconds (JVM running for 4.907)
+2020-06-24 17:20:36.110 [main] INFO  com.qun.BankSystemApplication - Starting BankSystemApplication on PC201908261901 with PID 12264 (D:\Java\BankSystem\target\classes started by Administrator in D:\Java\BankSystem)
+2020-06-24 17:20:36.124 [main] INFO  com.qun.BankSystemApplication - No active profile set, falling back to default profiles: default
+2020-06-24 17:20:37.182 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2020-06-24 17:20:37.183 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2020-06-24 17:20:37.184 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.36]
+2020-06-24 17:20:37.303 [main] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2020-06-24 17:20:38.258 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2020-06-24 17:20:38.291 [main] INFO  com.qun.BankSystemApplication - Started BankSystemApplication in 2.641 seconds (JVM running for 4.337)
+2020-06-24 17:20:44.478 [http-nio-8080-exec-1] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-06-24 17:20:47.830 [http-nio-8080-exec-4] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2020-06-24 17:24:13.575 [main] INFO  com.qun.BankSystemApplication - Starting BankSystemApplication on PC201908261901 with PID 10236 (D:\Java\BankSystem\target\classes started by Administrator in D:\Java\BankSystem)
+2020-06-24 17:24:13.585 [main] INFO  com.qun.BankSystemApplication - No active profile set, falling back to default profiles: default
+2020-06-24 17:24:14.858 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2020-06-24 17:24:14.859 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2020-06-24 17:24:14.859 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.36]
+2020-06-24 17:24:14.964 [main] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2020-06-24 17:24:15.865 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2020-06-24 17:24:15.896 [main] INFO  com.qun.BankSystemApplication - Started BankSystemApplication in 2.798 seconds (JVM running for 4.517)
+2020-06-24 17:24:38.680 [http-nio-8080-exec-1] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-06-24 17:24:43.159 [http-nio-8080-exec-2] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2020-06-24 17:30:53.315 [main] INFO  com.qun.BankSystemApplication - Starting BankSystemApplication on PC201908261901 with PID 8436 (D:\Java\BankSystem\target\classes started by Administrator in D:\Java\BankSystem)
+2020-06-24 17:30:53.330 [main] INFO  com.qun.BankSystemApplication - No active profile set, falling back to default profiles: default
+2020-06-24 17:30:54.580 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2020-06-24 17:30:54.581 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2020-06-24 17:30:54.581 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.36]
+2020-06-24 17:30:54.702 [main] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2020-06-24 17:30:55.771 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2020-06-24 17:30:55.809 [main] INFO  com.qun.BankSystemApplication - Started BankSystemApplication in 3.113 seconds (JVM running for 5.254)
+2020-06-24 17:31:08.455 [http-nio-8080-exec-1] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-06-24 17:31:12.598 [http-nio-8080-exec-2] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2020-06-24 17:32:40.129 [main] INFO  com.qun.BankSystemApplication - Starting BankSystemApplication on PC201908261901 with PID 10420 (D:\Java\BankSystem\target\classes started by Administrator in D:\Java\BankSystem)
+2020-06-24 17:32:40.139 [main] INFO  com.qun.BankSystemApplication - No active profile set, falling back to default profiles: default
+2020-06-24 17:32:41.332 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2020-06-24 17:32:41.333 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2020-06-24 17:32:41.333 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.36]
+2020-06-24 17:32:41.471 [main] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2020-06-24 17:32:42.492 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2020-06-24 17:32:42.524 [main] INFO  com.qun.BankSystemApplication - Started BankSystemApplication in 2.981 seconds (JVM running for 5.137)
+2020-06-24 17:32:56.940 [http-nio-8080-exec-1] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-06-24 17:32:59.971 [http-nio-8080-exec-2] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
