@@ -40,31 +40,37 @@
                 <button type="submit" style="height: 50px; margin-top: 38px;" class="btn btn-primary">确认</button>
             </form>
 
+            <div class="card">
+                <div class="card-body">
 
-            <div class="table-responsive">
-                <table class="table table-striped table-sm" th:if="${not #strings.isEmpty(logs)}">
-                    <thead>
-                    <tr>
-                        <th>编号</th>
-                        <th>转入卡</th>
-                        <th>转出卡</th>
-                        <th>金额</th>
-                        <th>类型</th>
-                        <th>日期</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="log:${logs}">
-                        <td th:text="${log.getLid()}"></td>
-                        <td th:text="${log.getCid1()==0?'————————————————':log.getCid1()}"></td>
-                        <td th:text="${log.getCid2()==0?'————————————————':log.getCid2()}"></td>
-                        <td th:text="${log.getAmount()}"></td>
-                        <td th:text="${log.getOperation()}"></td>
-                        <td th:text="${#dates.format(log.getDate(),'yyyy-MM-dd HH:mm:ss')}"></td>
-                    </tr>
-                    </tbody>
-                </table>
+                    <div class="table-responsive">
+                        <table id="basic-datatables" class="display table table-striped table-hover" th:if="${not #strings.isEmpty(logs)}">
+                            <thead>
+                            <tr>
+                                <th>编号</th>
+                                <th>转入卡</th>
+                                <th>转出卡</th>
+                                <th>金额</th>
+                                <th>类型</th>
+                                <th>日期</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="log:${logs}">
+                                <td th:text="${log.getLid()}"></td>
+                                <td th:text="${log.getCid1()==0?'————————————————':log.getCid1()}"></td>
+                                <td th:text="${log.getCid2()==0?'————————————————':log.getCid2()}"></td>
+                                <td th:text="${log.getAmount()}"></td>
+                                <td th:text="${log.getOperation()}"></td>
+                                <td th:text="${#dates.format(log.getDate(),'yyyy-MM-dd HH:mm:ss')}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
+
+
             <div>
                 <button style="display: none" id="alert_demo_3_2"> Error</button>
                 <button style="display: none" id="alert_demo_3_3"> Success</button>

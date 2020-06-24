@@ -63,7 +63,9 @@ public class AdminController {
     @GetMapping("/users")
     public String list(Model model){
         List<User> users = adminMapper.queryUserList();
+
         model.addAttribute("users",users);
+
         return "admin/list";
     }
 
@@ -95,10 +97,8 @@ public class AdminController {
         String id = uid+"";
 
         String i1 = id.substring(0,id.length()-1);
-        String i2 = id.substring(id.length()-1);
 
         set.addAll(adminMapper.roughQueryID(Integer.valueOf(i1)));
-        set.addAll(adminMapper.roughQueryID(Integer.valueOf(i2)));
 
         List<User> users = new ArrayList<>(set);
 
