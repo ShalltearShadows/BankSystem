@@ -7,12 +7,11 @@ import com.qun.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 @Controller
 public class LoginController {
@@ -70,13 +69,17 @@ public class LoginController {
     }
 
     @GetMapping("/user/register")
-    public String register(){
+    public String register(Model model){
+        model.addAttribute("userInfo",new User());
         return "register";
     }
 
     @PostMapping("/user/register")
-    public String register(User user,HttpSession session){
+    public String register(@ModelAttribute("userInfo") @Valid User user, BindingResult result, HttpSession session){
 
+        if (result.hasFieldErrors()){
+            return "register";
+        }
         userMapper.addUser(user);
 
         session.setAttribute("uid",user.getUid());
@@ -88,13 +91,19 @@ public class LoginController {
     }
 
     @GetMapping("/admin/adduser")
-    public String adduser(){
+    public String adduser(Model model){
+        model.addAttribute("userInfo",new User());
         return "admin/adduser";
     }
 
 
     @PostMapping("/admin/adduser")
-    public String adduser(User user,Model model){
+    public String adduser(@ModelAttribute("userInfo") @Valid User user, BindingResult result,Model model){
+
+        if (result.hasFieldErrors()){
+            return "admin/adduser";
+        }
+
         int flag = userMapper.addUser(user);
 
         if (flag==1){
