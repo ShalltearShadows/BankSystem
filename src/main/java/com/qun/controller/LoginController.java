@@ -2,6 +2,7 @@ package com.qun.controller;
 
 import com.qun.mapper.AdminMapper;
 import com.qun.mapper.UserMapper;
+import com.qun.mapper.UserMapperImpl;
 import com.qun.pojo.Admin;
 import com.qun.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,9 @@ public class LoginController {
     @Autowired
     private AdminMapper adminMapper;
 
+    @Autowired
+    private UserMapperImpl userMapperImpl;
+
     @GetMapping("/admin")
     public String adlogin(){
         return "admin";
@@ -31,7 +35,7 @@ public class LoginController {
     @PostMapping("/user/login")
     public String login(@RequestParam("uid") int uid, @RequestParam("pwd") String pwd, Model model, HttpSession session){
 
-        User user = userMapper.checkLogin(uid,pwd);
+        User user = userMapperImpl.checkLogin(uid,pwd);
 
         if (user!=null){
             session.setAttribute("uid",uid);
