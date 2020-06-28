@@ -232,4 +232,30 @@ public class AdminController {
         return "admin/home";
     }
 
+    @GetMapping("/delete")
+    public String delete(){
+        return "admin/delete";
+    }
+
+    @PostMapping("/delete")
+    public String delete(@RequestParam("pwd1") String pwd1,@RequestParam("pwd2") String pwd2,
+                         Model model,HttpSession session){
+
+        int aid = (int) session.getAttribute("uid");
+        Admin admin = adminMapper.getAdminByID(aid);
+
+        if (!admin.getApwd().equals(pwd1)){
+            model.addAttribute("msg","密码不正确");
+            return "admin/delete";
+        }else if (!pwd1.equals(pwd2)){
+            model.addAttribute("msg","两次输入的密码不一致");
+            return "admin/delete";
+        }else {
+            adminMapper.deleteAdmin(aid);
+            model.addAttribute("smsg","注销成功");
+            session.invalidate();
+            return "index";
+        }
+    }
+
 }

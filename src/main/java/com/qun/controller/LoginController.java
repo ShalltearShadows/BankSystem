@@ -2,7 +2,7 @@ package com.qun.controller;
 
 import com.qun.mapper.AdminMapper;
 import com.qun.mapper.UserMapper;
-import com.qun.mapper.UserMapperImpl;
+import com.qun.service.UserMapperImpl;
 import com.qun.pojo.Admin;
 import com.qun.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;

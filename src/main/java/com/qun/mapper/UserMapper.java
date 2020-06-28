@@ -26,7 +26,7 @@ public interface UserMapper {
     User getUser(@Param("uid") int uid);
     
     int addUser(User user);
-    //@CacheEvict(value = {"usercard","userlogin","user"},allEntries = true)
+    @CacheEvict(value = {"usercard","userlogin","user"},allEntries = true)
     int alterUser(User user);
     @CacheEvict(value = {"usercard","userlogin","user"},allEntries = true)
     int deleteUser(@Param("uid") int id);
